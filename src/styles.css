@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600&family=Gantari:wght@700&family=Inter:wght@400;500&family=Manrope:wght@700;800&display=swap");
-
 :root {
-  font-family: "Epilogue", sans-serif;
+  font-family: "Epilogue", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   color: #121315;
   background: #80beee;
   font-synthesis: none;

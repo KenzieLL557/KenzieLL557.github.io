@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 
 def convert(source, destination, max_side=None, quality=82):
@@ -33,4 +33,25 @@ targets = [
 
 for filename, max_side, quality in targets:
     source = Path(filename)
-    convert(source, source.with_suffix(".webp"), max_side=max_side, quality=quality)
+    if source.exists():
+        convert(source, source.with_suffix(".webp"), max_side=max_side, quality=quality)
+
+
+# Deployment assets: photographic UI imagery can be bounded to a practical
+# browser resolution, while project boards keep their source dimensions so
+# text remains readable in the zoom viewer.
+for root, max_side, quality in [
+    (Path("public/assets"), 2400, 82),
+    (Path("work/dayi-agent-platform"), None, 88),
+    (Path("work/xiaoluo-zhiduoxing/assets"), None, 88),
+]:
+    for source in root.rglob("*"):
+        if source.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
+            continue
+        destination = source.with_suffix(".webp")
+        if destination.exists():
+            continue
+        try:
+            convert(source, destination, max_side=max_side, quality=quality)
+        except (UnidentifiedImageError, OSError):
+            print(f"Skipped unreadable image: {source}")

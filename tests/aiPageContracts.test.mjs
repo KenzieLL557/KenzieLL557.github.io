@@ -34,8 +34,8 @@ test("latest AI article content and presentation feedback is preserved", async (
   assert.match(source, /从零散尝试，到可复用的设计方法/);
   assert.match(source, /各大厂商也在持续更新 AI Chat 组件体系/);
   assert.match(source, /一天内完成一套可用于后续设计与开发协作的基础规范/);
-  assert.match(source, /aigc-health-exam-flow\.png/);
-  assert.match(source, /aigc-digital-care-scenes\.png/);
+  assert.match(source, /aigc-health-exam-flow\.webp/);
+  assert.match(source, /aigc-digital-care-scenes\.webp/);
   assert.match(source, /className="ai-compare-caption">Before\/After/);
   assert.match(source, /<h4>可利用 AI<\/h4>/);
   assert.match(source, /<h4>需要注意<\/h4>/);
@@ -66,7 +66,7 @@ test("latest AI copy edits and AIGC image removal are preserved", async () => {
   assert.match(source, /因此我们也开始着手搭建自己的组件库/);
   assert.match(source, /在基础组件与设计规范建设中/);
   assert.match(source, /以小罗项目为例/);
-  assert.doesNotMatch(source, /aigc-avatar-doctor\.png/);
+  assert.doesNotMatch(source, /aigc-avatar-doctor\.webp/);
 });
 
 test("QF and XT image projects are wired into the work folder and lazy gallery", async () => {
@@ -102,7 +102,7 @@ test("homepage dock expands spacing while icons stay fixed inside a bounded hove
   assert.match(source, /label="wechat"/);
   assert.match(source, /const \[qrOpen, setQrOpen\] = useState\(false\);/);
   assert.match(source, /aria-expanded=\{qrCode \? qrOpen : undefined\}/);
-  assert.match(source, /home-wechat-qr\.png/);
+  assert.match(source, /home-wechat-qr\.webp/);
   assert.doesNotMatch(source, /top-dock-tooltip/);
   assert.match(styles, /\.top-dock-qr-popover\s*\{[^}]*opacity:\s*0;/s);
   assert.match(styles, /\.top-dock-link\.is-qr-open \.top-dock-qr-popover[^}]*opacity:\s*1;/s);
@@ -237,7 +237,7 @@ test("Life opens as a full-screen Figma-based page with uncropped photo frames",
   assert.match(styles, /\.life-intro-panel\s*\{[^}]*flex:\s*0 0 69\.45vw;/s);
   assert.match(styles, /\.life-intro-panel\s*\{[^}]*background:\s*transparent;/s);
   assert.match(styles, /\.life-gallery\s*\{[^}]*--life-paper:\s*#dbebe0;/s);
-  assert.match(source, /className="life-gallery-scenery"[^>]*life-hills\.png/);
+  assert.match(source, /className="life-gallery-scenery"[^>]*life-hills\.webp/);
   assert.match(styles, /\.film-canister-art/);
   assert.doesNotMatch(source, /function FilmSprocketRow\(\{ position \}\)/);
   assert.doesNotMatch(source, /className=\{`film-sprocket-row film-sprocket-row-\$\{position\}`\}/);
@@ -339,7 +339,7 @@ test("work projects use the five supplied covers with supporting copy and tags",
     readFile(new URL("src/styles.css", root), "utf8")
   ]);
 
-  for (const cover of ["work-dayi.png", "work-xiaoluo.png", "work-ai.png", "work-qf.png", "work-xt.png"]) {
+  for (const cover of ["work-dayi.webp", "work-xiaoluo.webp", "work-ai.webp", "work-qf.webp", "work-xt.webp"]) {
     assert.match(source, new RegExp(cover.replace(".", "\\.")));
   }
 
@@ -436,7 +436,7 @@ test("resume preview defaults to Chinese with a clean top toolbar and icon actio
   assert.match(source, /data-tooltip="在新窗口打开"/);
   assert.match(source, /<Icon name="download"/);
   assert.match(source, /<Icon name="external"/);
-  assert.match(source, /previewSrc:\s*"\/assets\/resume\/liao-kongqing-cn\.jpg"/);
+  assert.match(source, /previewSrc:\s*"\/assets\/resume\/liao-kongqing-cn\.webp"/);
   assert.match(source, /className="resume-document-image"/);
   assert.doesNotMatch(source, /<iframe[\s\S]*?src=\{pdfSrc\}/);
   assert.match(styles, /\.resume-preview\s*\{[^}]*height:\s*min\(820px,/s);

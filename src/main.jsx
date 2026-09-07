@@ -44,38 +44,38 @@ const CAT_SPRITE_FRAMES = [
 const CAT_PATROL_DURATION = 28000;
 const CAT_FRAME_DURATION = 165;
 const LIFE_PHOTOS = [
-  ["c3421d9d97032cac95431e73b16b5305.JPG", "Cliff valley walk"],
-  ["11268f2db03c5ce4efb7d95d780672a8.jpg", "Mountain road under clouds"],
-  ["80e15d77245fbae533b3ecc659e92a8f.jpg", "Terraced fields in the mist"],
-  ["31e0d4286c938a58c7125563aa3134f6.jpg", "A quiet bench in the woods"],
-  ["437b610595fb3ca76229f044b8ead688.jpg", "Walking beneath a great tree"],
-  ["b22e3e539e5a7f8a80b4885a1a1e6720.jpg", "Rainy lakeside garden"],
-  ["90f6262046b91f94ff9c8194caafb8f8.jpg", "Moss garden after rain"],
-  ["909e6de8ca3866f94c43705e1cd8065e.jpg", "Autumn trees by the water"],
-  ["life-tropical-forest.jpg", "Sunlight through a tropical forest"],
-  ["life-tea-mountains.jpg", "Tea fields beneath misty mountains"],
-  ["life-mountain-road.jpg", "A quiet road beneath stormy mountains"],
-  ["life-snow-cycling.jpeg", "Cyclists crossing a snowy mountain pass"],
-  ["life-seaside-sunset.jpg", "Watching the sunset by the sea"],
-  ["life-blue-sky-tree.jpg", "A winter tree against the blue sky"],
-  ["a8e25e4545e3b1bfd01bcfc668b39a47.jpg", "Small white flowers"],
-  ["ba72c9235a99df64ee982bc760e7523b.jpg", "A figure in a green garden"],
-  ["4bc6f662f1a7d1d9934829d9634895f4.jpg", "Sunset rower on the lake"],
-  ["5fab4c2c7f4be7e1c00ae385a613e822.jpg", "A quiet urban moment"],
-  ["fbf10f2c0de46937a3a2dbd702ea8403.jpg", "The duck keeper"],
-  ["de03c7c33596c6a66562c17eb3f553e6.jpg", "Crossing an old city street"],
-  ["723a45f5d032e1b5eb457278c8720b07.jpg", "Blue sky between buildings"],
-  ["61139c60498c6583b9c7dee5bb30f02c.jpg", "Blue and white street corner"],
-  ["b51de30429e76b33d08cfa8b9935c3fc.jpg", "Blue wall notes"],
-  ["bd800f217b495034771e5ae1db9d755c.jpg", "Night street lights"],
-  ["C4B05D2B-287B-40F2-B993-8A5670224187.JPG", "City evening in film color"],
-  ["life-hongkong-street.jpeg", "Red taxis on a Hong Kong street"],
-  ["life-church-window.jpg", "Light through a stained-glass window"],
-  ["life-aquarium.jpg", "Fish drifting through blue water"],
-  ["life-cycling-bike.jpg", "A cycling day in yellow"],
-  ["life-music-player.jpg", "A favorite album and music player"],
-  ["life-new-yorker-puzzle.jpg", "A finished New Yorker winter puzzle"],
-  ["17e5de604d0d608f885d80310065fddb.jpg", "Records in a late-night shop"]
+  ["c3421d9d97032cac95431e73b16b5305.webp", "Cliff valley walk"],
+  ["11268f2db03c5ce4efb7d95d780672a8.webp", "Mountain road under clouds"],
+  ["80e15d77245fbae533b3ecc659e92a8f.webp", "Terraced fields in the mist"],
+  ["31e0d4286c938a58c7125563aa3134f6.webp", "A quiet bench in the woods"],
+  ["437b610595fb3ca76229f044b8ead688.webp", "Walking beneath a great tree"],
+  ["b22e3e539e5a7f8a80b4885a1a1e6720.webp", "Rainy lakeside garden"],
+  ["90f6262046b91f94ff9c8194caafb8f8.webp", "Moss garden after rain"],
+  ["909e6de8ca3866f94c43705e1cd8065e.webp", "Autumn trees by the water"],
+  ["life-tropical-forest.webp", "Sunlight through a tropical forest"],
+  ["life-tea-mountains.webp", "Tea fields beneath misty mountains"],
+  ["life-mountain-road.webp", "A quiet road beneath stormy mountains"],
+  ["life-snow-cycling.webp", "Cyclists crossing a snowy mountain pass"],
+  ["life-seaside-sunset.webp", "Watching the sunset by the sea"],
+  ["life-blue-sky-tree.webp", "A winter tree against the blue sky"],
+  ["a8e25e4545e3b1bfd01bcfc668b39a47.webp", "Small white flowers"],
+  ["ba72c9235a99df64ee982bc760e7523b.webp", "A figure in a green garden"],
+  ["4bc6f662f1a7d1d9934829d9634895f4.webp", "Sunset rower on the lake"],
+  ["5fab4c2c7f4be7e1c00ae385a613e822.webp", "A quiet urban moment"],
+  ["fbf10f2c0de46937a3a2dbd702ea8403.webp", "The duck keeper"],
+  ["de03c7c33596c6a66562c17eb3f553e6.webp", "Crossing an old city street"],
+  ["723a45f5d032e1b5eb457278c8720b07.webp", "Blue sky between buildings"],
+  ["61139c60498c6583b9c7dee5bb30f02c.webp", "Blue and white street corner"],
+  ["b51de30429e76b33d08cfa8b9935c3fc.webp", "Blue wall notes"],
+  ["bd800f217b495034771e5ae1db9d755c.webp", "Night street lights"],
+  ["C4B05D2B-287B-40F2-B993-8A5670224187.webp", "City evening in film color"],
+  ["life-hongkong-street.webp", "Red taxis on a Hong Kong street"],
+  ["life-church-window.webp", "Light through a stained-glass window"],
+  ["life-aquarium.webp", "Fish drifting through blue water"],
+  ["life-cycling-bike.webp", "A cycling day in yellow"],
+  ["life-music-player.webp", "A favorite album and music player"],
+  ["life-new-yorker-puzzle.webp", "A finished New Yorker winter puzzle"],
+  ["17e5de604d0d608f885d80310065fddb.webp", "Records in a late-night shop"]
 ].map(([file, alt], index) => {
   const optimizedFile = file.replace(/\.(?:jpe?g|png)$/i, ".webp");
   const src = `/assets/life/user-photos/${optimizedFile}`;
@@ -94,13 +94,13 @@ const workCardVariants = {
     transition: { type: "spring", stiffness: 300, damping: 25, mass: 0.72 }
   }
 };
-const dayiModules = import.meta.glob("../work/dayi-agent-platform/*", {
+const dayiModules = import.meta.glob("../work/dayi-agent-platform/*.webp", {
   eager: true,
   query: "?url",
   import: "default"
 });
 const dayiAsset = (name) => dayiModules[`../work/dayi-agent-platform/${name}`];
-const xiaoluoModules = import.meta.glob("../work/xiaoluo-zhiduoxing/assets/*", {
+const xiaoluoModules = import.meta.glob("../work/xiaoluo-zhiduoxing/assets/*.webp", {
   eager: true,
   query: "?url",
   import: "default"
@@ -160,11 +160,11 @@ const FOLDER_CONTENT = {
 };
 
 const WORK_COVER_IMAGES = {
-  dayi: "work-dayi.png",
-  xiaoluo: "work-xiaoluo.png",
-  ai: "work-ai.png",
-  qf: "work-qf.png",
-  xt: "work-xt.png"
+  dayi: "work-dayi.webp",
+  xiaoluo: "work-xiaoluo.webp",
+  ai: "work-ai.webp",
+  qf: "work-qf.webp",
+  xt: "work-xt.webp"
 };
 
 const PROJECT_NAV = [
@@ -222,15 +222,15 @@ const XIAOLUO_META = [
 ];
 
 const XIAOLUO_PERSONAS = [
-  ["persona-doctor.png", "医院-临床医生", "临床科研或案例报告撰写，需要快速检索医学文献，也需要合理规划实验设计与数据分析"],
-  ["persona-researcher.png", "科研院所、实验室科研人员", "需要大量文献检索、数据分析与论文写作，渴望提高研究效率、快速掌握领域新进展。"],
-  ["persona-enterprise.png", "医药企业/其他领域客户", "需要内部研究与创新，加速成果产出，亦可通过私有化部署或API集成进行企业级管理。"]
+  ["persona-doctor.webp", "医院-临床医生", "临床科研或案例报告撰写，需要快速检索医学文献，也需要合理规划实验设计与数据分析"],
+  ["persona-researcher.webp", "科研院所、实验室科研人员", "需要大量文献检索、数据分析与论文写作，渴望提高研究效率、快速掌握领域新进展。"],
+  ["persona-enterprise.webp", "医药企业/其他领域客户", "需要内部研究与创新，加速成果产出，亦可通过私有化部署或API集成进行企业级管理。"]
 ];
 
 const XIAOLUO_HOME_THEMES = [
-  ["blue", "蓝色", "home-after-blue.png", "#0b55d9"],
-  ["purple", "紫色", "home-after-purple.png", "#6b4ce6"],
-  ["orange", "橙色", "home-after-orange.png", "#ff6a2f"]
+  ["blue", "蓝色", "home-after-blue.webp", "#0b55d9"],
+  ["purple", "紫色", "home-after-purple.webp", "#6b4ce6"],
+  ["orange", "橙色", "home-after-orange.webp", "#ff6a2f"]
 ];
 
 const XIAOLUO_HOME_NOTES = {
@@ -304,9 +304,9 @@ const AI_PROTOTYPE_STEPS = [
 ];
 
 const AI_AIGC_IMAGES = [
-  ["aigc-health-exam-flow.png", "智能体检方案、健康摘要、到院指南与检前注意事项界面"],
-  ["aigc-xiaoluo-cases.png", "神笔小罗产品场景、生成状态与额度提示设计"],
-  ["aigc-digital-care-scenes.png", "数字医护助手语音咨询与医院一体机界面"]
+  ["aigc-health-exam-flow.webp", "智能体检方案、健康摘要、到院指南与检前注意事项界面"],
+  ["aigc-xiaoluo-cases.webp", "神笔小罗产品场景、生成状态与额度提示设计"],
+  ["aigc-digital-care-scenes.webp", "数字医护助手语音咨询与医院一体机界面"]
 ];
 
 const IMAGE_PROJECTS = {
@@ -319,7 +319,7 @@ const IMAGE_PROJECTS = {
     team: "独立设计师",
     role: "前期调研 · 产品设计",
     accent: "#605cf2",
-    pages: [1, 2, 3, 4, 5, 6, 7, 8, 10].map((page) => `/assets/projects/qf/${page}.png`)
+    pages: [1, 2, 3, 4, 5, 6, 7, 8, 10].map((page) => `/assets/projects/qf/${page}.webp`)
   },
   xt: {
     index: "05",
@@ -330,7 +330,7 @@ const IMAGE_PROJECTS = {
     team: "3 位设计师合作",
     role: "体验设计 · 视觉升级",
     accent: "#e9b91b",
-    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => `/assets/projects/xt/${page}.png`)
+    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => `/assets/projects/xt/${page}.webp`)
   }
 };
 
@@ -366,14 +366,14 @@ const RESUME_DOCS = [
     language: "中文",
     fileName: "廖孔晴-个人简历.pdf",
     src: "/assets/resume/liao-kongqing-cn.pdf",
-    previewSrc: "/assets/resume/liao-kongqing-cn.jpg"
+    previewSrc: "/assets/resume/liao-kongqing-cn.webp"
   },
   {
     id: "en",
     language: "English",
     fileName: "Liao-Kongqing-Resume.pdf",
     src: "/assets/resume/liao-kongqing-en.pdf",
-    previewSrc: "/assets/resume/liao-kongqing-en.jpg"
+    previewSrc: "/assets/resume/liao-kongqing-en.webp"
   }
 ];
 
@@ -389,7 +389,7 @@ const HOTSPOT_NOTES = {
   },
   b: {
     title: "b. 平台结构清晰化，不同角色显示不同的首页模块内容",
-    image: "note-b.png",
+    image: "note-b.webp",
     direction: "left"
   }
 };
@@ -543,7 +543,7 @@ function TopNavigation() {
           label="wechat"
           icon="linkedin.svg"
           mouseX={mouseX}
-          qrCode="home-wechat-qr.png"
+          qrCode="home-wechat-qr.webp"
           qrOpen={qrOpen}
           onToggleQr={() => setQrOpen((open) => !open)}
         />
@@ -576,7 +576,7 @@ function FigmaFolder({ className, variant, label, onOpen }) {
             <i className="folder-sheet folder-sheet-back" />
             <i className="folder-sheet folder-sheet-middle" />
             <i className="folder-cover folder-cover-life">
-              <img src={asset("life-mango.png")} alt="" />
+              <img src={asset("life-mango.webp")} alt="" />
             </i>
           </>
         )}
@@ -1338,7 +1338,7 @@ function LifeGallery({ onClose }) {
       exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.992 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.42, ease: [0.22, 1, 0.36, 1] }}
     >
-      <img className="life-gallery-scenery" src="/assets/life/life-hills.png" alt="" aria-hidden="true" draggable="false" />
+      <img className="life-gallery-scenery" src="/assets/life/life-hills.webp" alt="" aria-hidden="true" draggable="false" />
       <LifeStoryCopy expanded={storyExpanded} />
       <button ref={closeButtonRef} type="button" className="life-gallery-close" tabIndex={selectedPhoto ? -1 : 0} onClick={onClose} aria-label="关闭 Life 并返回首页"><Icon name="close" size={20} /></button>
       <div
@@ -1453,12 +1453,12 @@ function FolderWindow({ folder, onClose, onOpenProject }) {
                       <i>形 · 色 · 质 · 序</i>
                     </span>
                   )}
-                  {folder !== "work" && cover === "mango" && <img src={asset("life-mango.png")} alt="" />}
+                  {folder !== "work" && cover === "mango" && <img src={asset("life-mango.webp")} alt="" />}
                   {folder !== "work" && cover === "hero" && <img src={asset("hero-frame.webp")} alt="" />}
                   {folder !== "work" && cover === "dayi" && (
                     <span className="folder-dayi-cover-composite">
-                      <img src={dayiAsset("image-604.png")} alt="" />
-                      <img src={dayiAsset("home-empty.png")} alt="" />
+                      <img loading="lazy" decoding="async" src={dayiAsset("image-604.webp")} alt="" />
+                      <img loading="lazy" decoding="async" src={dayiAsset("home-empty.webp")} alt="" />
                     </span>
                   )}
                   {folder !== "work" && cover === "roche" && (
@@ -1469,8 +1469,8 @@ function FolderWindow({ folder, onClose, onOpenProject }) {
                   )}
                   {folder !== "work" && cover === "xiaoluo" && (
                     <span className="folder-xiaoluo-cover-composite">
-                      <img src={xiaoluoAsset("assets/hero-bg.png")} alt="" />
-                      <img src={xiaoluoAsset("assets/hero-ui.png")} alt="" />
+                      <img src={xiaoluoAsset("assets/hero-bg.webp")} alt="" />
+                      <img src={xiaoluoAsset("assets/hero-ui.webp")} alt="" />
                     </span>
                   )}
                 </i>
@@ -1488,7 +1488,7 @@ function FolderWindow({ folder, onClose, onOpenProject }) {
 function ProjectImage({ src, alt, className = "", onZoom }) {
   return (
     <button type="button" className={`project-image-button ${className}`} onClick={() => onZoom(src, alt)}>
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} loading="lazy" decoding="async" />
     </button>
   );
 }
@@ -1542,9 +1542,9 @@ function XiaoluoHomeCompare({ xlImg }) {
         ref={frameRef}
         style={{ "--split": `${split}%`, "--after-clip": `${100 - split}%`, "--theme": theme[3] }}
       >
-        <img className="xiaoluo-compare-before" src={xlImg("home-after-blue.png")} alt="首页优化后方案" />
+        <img className="xiaoluo-compare-before" src={xlImg("home-after-blue.webp")} alt="首页优化后方案" />
         <div className="xiaoluo-compare-after">
-          <img src={xlImg("home-a.png")} alt="首页优化前方案" />
+          <img loading="lazy" decoding="async" src={xlImg("home-a.webp")} alt="首页优化前方案" />
         </div>
         <div className="xiaoluo-compare-divider" style={{ left: `${split}%` }} />
         <button
@@ -1562,7 +1562,7 @@ function XiaoluoHomeCompare({ xlImg }) {
       </div>
       <p className="xiaoluo-compare-caption">Before/After</p>
       <div className="xiaoluo-after-interactive" style={{ "--theme": theme[3] }} onClick={() => setActiveNote(null)}>
-        <img src={xlImg(theme[2])} alt={`首页最终方案-${theme[1]}`} />
+        <img loading="lazy" decoding="async" src={xlImg(theme[2])} alt={`首页最终方案-${theme[1]}`} />
         {Object.entries(XIAOLUO_HOME_NOTES).map(([id, item]) => (
           <button
             key={id}
@@ -1614,8 +1614,8 @@ function XiaoluoHomeCompare({ xlImg }) {
 
 function XiaoluoHomeDrafts({ xlImg, openZoom }) {
   const drafts = [
-    ["home-a.png", "初版主题A"],
-    ["home-b.png", "初版主题B"]
+    ["home-a.webp", "初版主题A"],
+    ["home-b.webp", "初版主题B"]
   ];
 
   return (
@@ -1623,7 +1623,7 @@ function XiaoluoHomeDrafts({ xlImg, openZoom }) {
       {drafts.map(([src, label]) => (
         <figure key={label}>
           <button type="button" onClick={() => openZoom(xlImg(src), label)}>
-            <img src={xlImg(src)} alt={label} />
+            <img loading="lazy" decoding="async" src={xlImg(src)} alt={label} />
           </button>
           <figcaption>{label}</figcaption>
         </figure>
@@ -1640,7 +1640,7 @@ function HotspotDemo({ onZoom }) {
 
   return (
     <div className="hotspot-demo" onClick={() => setActive(null)}>
-      <img src={dayiAsset("home-empty.png")} alt="平台首页空状态" />
+      <img loading="lazy" decoding="async" src={dayiAsset("home-empty.webp")} alt="平台首页空状态" />
       {["a", "b"].map((key) => (
         <button
           type="button"
@@ -1670,7 +1670,7 @@ function HotspotDemo({ onZoom }) {
           )}
           {note.image && (
             <button type="button" className="sticky-note-image" onClick={() => onZoom(dayiAsset(note.image), "便签截图")}>
-              <img src={dayiAsset(note.image)} alt="便签截图" />
+              <img loading="lazy" decoding="async" src={dayiAsset(note.image)} alt="便签截图" />
             </button>
           )}
           <button type="button" className="sticky-note-arrow" onClick={switchNote} aria-label="切换标注">
@@ -1803,9 +1803,9 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
           <div className="project-tags">
             {["AI Agent", "医疗 SaaS", "工作流设计", "平台化产品"].map((tag) => <span key={tag}>{tag}</span>)}
           </div>
-          <button type="button" className="project-hero-image" onClick={() => openZoom(dayiAsset("home-empty.png"), "大医智能体平台首页")}>
-            <img src={dayiAsset("image-604.png")} alt="" />
-            <img src={dayiAsset("home-empty.png")} alt="大医智能体平台首页" />
+          <button type="button" className="project-hero-image" onClick={() => openZoom(dayiAsset("home-empty.webp"), "大医智能体平台首页")}>
+            <img loading="lazy" decoding="async" src={dayiAsset("image-604.webp")} alt="" />
+            <img loading="lazy" decoding="async" src={dayiAsset("home-empty.webp")} alt="大医智能体平台首页" />
           </button>
         </section>
 
@@ -1838,11 +1838,11 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
           <h2>核心业务目标</h2>
           <div className="goal-grid">
             {[
-              ["icon-tool.png", "提升平台化交付效率", "从项目制交付转向平台化交付，使单个场景的上线周期缩短40%～60%，单项目的人力投入下降30%～50%。"],
-              ["icon-thumb-up.png", "提升医院项目转化与商业竞争力", "提升平台在医院评审、投标和方案演示中的支撑能力。"],
-              ["icon-target.png", "建立平台运行治理与资源可控能力", "建立机构、模型、配额和监控的一体化治理能力，降低人工维护成本。"]
+              ["icon-tool.webp", "提升平台化交付效率", "从项目制交付转向平台化交付，使单个场景的上线周期缩短40%～60%，单项目的人力投入下降30%～50%。"],
+              ["icon-thumb-up.webp", "提升医院项目转化与商业竞争力", "提升平台在医院评审、投标和方案演示中的支撑能力。"],
+              ["icon-target.webp", "建立平台运行治理与资源可控能力", "建立机构、模型、配额和监控的一体化治理能力，降低人工维护成本。"]
             ].map(([icon, title, copy]) => (
-              <article key={title}><img src={dayiAsset(icon)} alt="" /><h3>{title}</h3><p>{copy}</p></article>
+              <article key={title}><img loading="lazy" decoding="async" src={dayiAsset(icon)} alt="" /><h3>{title}</h3><p>{copy}</p></article>
             ))}
           </div>
         </section>
@@ -1856,7 +1856,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
             <div>医生 / 知识编辑</div><div>负责医学知识整理、内容维护、审核</div><div>维护知识库、校对知识内容、确保专业性</div><div>中频</div>
             <div>机构管理员</div><div>负责机构管理、模型配额、权限、监控</div><div>分配资源、配置模型、监控使用情况</div><div>高频</div>
           </div>
-          <ProjectImage src={dayiAsset("image-605.png")} alt="用户角色图" className="user-roles-shot" onZoom={openZoom} />
+          <ProjectImage src={dayiAsset("image-605.webp")} alt="用户角色图" className="user-roles-shot" onZoom={openZoom} />
         </section>
 
         <section id="insights" className="project-section">
@@ -1872,7 +1872,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
         <section id="architecture" className="project-section">
           <h2>平台信息框架</h2>
           <p className="section-copy">我负责的主要是平台首页、工作流平台级管理端部分内容、工具平台、模型管理、安全策略与监控和用户管理的部分内容。</p>
-          <ProjectImage src={dayiAsset("info-architecture.png")} alt="平台信息架构" onZoom={openZoom} />
+          <ProjectImage src={dayiAsset("info-architecture.webp")} alt="平台信息架构" onZoom={openZoom} />
         </section>
 
         <section id="strategy" className="project-section">
@@ -1891,7 +1891,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
               <p>由于项目当时处于平台从 0 到 1 的建设阶段，且需要优先支撑医院方案演示和基础交付，因此工作流模块在第一阶段优先采用了更稳妥的通用型解法，先保证搭建、预览、发布等核心链路可用；该模块主要的医疗场景差异化体现在后续的医学专题库节点。</p>
             </div>
             <div className="horizontal-gallery" aria-label="竞品分析图片横向滚动">
-              {["competitor-1.png", "competitor-2.png", "competitor-3.png"].map((name, index) => (
+              {["competitor-1.webp", "competitor-2.webp", "competitor-3.webp"].map((name, index) => (
                 <ProjectImage key={name} src={dayiAsset(name)} alt={`竞品分析 ${index + 1}`} onZoom={openZoom} />
               ))}
             </div>
@@ -1901,17 +1901,17 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
         <section className="project-section solution-section">
           <article>
             <h3>a. 创建规范统一的节点连接规则，通过低门槛的可视化节点 + 连线的工作流编排替代代码开发；</h3>
-            <ProjectImage src={dayiAsset("workflow-rules.png")} alt="节点连接规则" onZoom={openZoom} />
+            <ProjectImage src={dayiAsset("workflow-rules.webp")} alt="节点连接规则" onZoom={openZoom} />
           </article>
           <article>
             <h3>b. 通过节点类型的视觉分层设计，提供执行状态反馈，增强流程可理解性；</h3>
-            <ProjectImage src={dayiAsset("node-types.png")} alt="节点类型视觉分层" onZoom={openZoom} />
+            <ProjectImage src={dayiAsset("node-types.webp")} alt="节点类型视觉分层" onZoom={openZoom} />
           </article>
           <article>
             <h3>c. 提供变更历史、执行状态可视化反馈、和节点级结果查看，强化搭建过程中的验证能力</h3>
             <div className="validation-gallery">
-              <ProjectImage src={dayiAsset("execution-state.png")} alt="执行状态可视化反馈" onZoom={openZoom} />
-              <ProjectImage src={dayiAsset("detail-result.png")} alt="节点级结果查看" onZoom={openZoom} />
+              <ProjectImage src={dayiAsset("execution-state.webp")} alt="执行状态可视化反馈" onZoom={openZoom} />
+              <ProjectImage src={dayiAsset("detail-result.webp")} alt="节点级结果查看" onZoom={openZoom} />
             </div>
           </article>
           <article>
@@ -1923,8 +1923,8 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
               <li>为后续医院项目扩展提供稳定的治理基础。</li>
             </ul>
             <div className="model-management-gallery">
-              <ProjectImage src={dayiAsset("model-management-1.png")} alt="模型管理页面一" className="model-management-shot model-management-shot-primary" onZoom={openZoom} />
-              <ProjectImage src={dayiAsset("model-management-2.png")} alt="模型管理页面二" className="model-management-shot" onZoom={openZoom} />
+              <ProjectImage src={dayiAsset("model-management-1.webp")} alt="模型管理页面一" className="model-management-shot model-management-shot-primary" onZoom={openZoom} />
+              <ProjectImage src={dayiAsset("model-management-2.webp")} alt="模型管理页面二" className="model-management-shot" onZoom={openZoom} />
             </div>
           </article>
         </section>
@@ -1932,7 +1932,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
         <section id="others" className="project-section">
           <h2>其他页面</h2>
           <div className="horizontal-gallery other-gallery">
-            {["other-hover.png", "other-mcp.png"].map((name, index) => (
+            {["other-hover.webp", "other-mcp.webp"].map((name, index) => (
               <ProjectImage key={name} src={dayiAsset(name)} alt={`其他页面 ${index + 1}`} onZoom={openZoom} />
             ))}
           </div>
@@ -1950,7 +1950,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
               <h4><span>02</span> 对工作方式的反思</h4>
               <p>在项目推进过程中，我也对设计工作的方式有了一些新的思考，前期对我们来说最大的挑战是<strong>需求不明晰+时间紧任务重</strong>。需求评审后还存在大量模糊的内容，此时我们分模块对整体需求进行了梳理，将不明确的点进行标注，并做了大量竞品体验，和产品共同定义讨论后梳理出较为完整的需求框架，由此开始着手设计。所以在之后的工作中，针对一些还在探索的业务场景，<strong>设计需要更早参与产品定义，同时与产品、技术需要更紧密协作，才能提升方案推进效率。</strong></p>
             </div>
-            <ProjectImage src={dayiAsset("summary.png")} alt="项目总结插图" className="summary-shot" onZoom={openZoom} />
+            <ProjectImage src={dayiAsset("summary.webp")} alt="项目总结插图" className="summary-shot" onZoom={openZoom} />
           </div>
         </section>
 
@@ -2042,7 +2042,7 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
 
       <aside className="project-toc xiaoluo-toc">
         <button type="button" className="project-back" onClick={onBack}><Icon name="left" size={14} /> 返回</button>
-        <img className="xiaoluo-roche-logo" src={xlImg("roche-logo.png")} alt="Roche" />
+        <img className="xiaoluo-roche-logo" src={xlImg("roche-logo.webp")} alt="Roche" />
         <nav aria-label="小罗智多星项目目录">
           <button
             type="button"
@@ -2092,9 +2092,9 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
               <span>敏捷交付</span>
             </div>
           </div>
-          <button type="button" className="xiaoluo-hero-visual" onClick={() => openZoom(xlImg("hero-ui.png"), "小罗智多星首页界面")}>
-            <img className="xiaoluo-hero-bg" src={xlImg("hero-bg.png")} alt="" />
-            <img className="xiaoluo-hero-ui" src={xlImg("hero-ui.png")} alt="小罗智多星首页界面" />
+          <button type="button" className="xiaoluo-hero-visual" onClick={() => openZoom(xlImg("hero-ui.webp"), "小罗智多星首页界面")}>
+            <img className="xiaoluo-hero-bg" src={xlImg("hero-bg.webp")} alt="" />
+            <img className="xiaoluo-hero-ui" src={xlImg("hero-ui.webp")} alt="小罗智多星首页界面" />
           </button>
         </section>
 
@@ -2119,9 +2119,9 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
               <p>但在真实工作中，临床科研长期面临几个典型问题 →</p>
             </div>
             <div className="xiaoluo-problem-stack">
-              {["problem-1.png", "problem-2.png", "problem-3.png", "problem-4.png"].map((name, index) => (
+              {["problem-1.webp", "problem-2.webp", "problem-3.webp", "problem-4.webp"].map((name, index) => (
                 <button key={name} type="button" onClick={() => openZoom(xlImg(name), `科研问题 ${index + 1}`)}>
-                  <img src={xlImg(name)} alt={`科研问题 ${index + 1}`} />
+                  <img loading="lazy" decoding="async" src={xlImg(name)} alt={`科研问题 ${index + 1}`} />
                 </button>
               ))}
             </div>
@@ -2133,7 +2133,7 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
           <div className="xiaoluo-persona-grid">
             {XIAOLUO_PERSONAS.map(([image, title, body]) => (
               <article key={title}>
-                <img src={xlImg(image)} alt={title} />
+                <img loading="lazy" decoding="async" src={xlImg(image)} alt={title} />
                 <h4>{title}</h4>
                 <p>{body}</p>
               </article>
@@ -2201,22 +2201,22 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
         <section id="xl-pubmed" className="xiaoluo-section xiaoluo-case-section">
           <div className="xiaoluo-blue-title"><span>02</span><strong>PubMed检索</strong></div>
           <p>医学科研人员在课题研究前期和论文撰写阶段都需要按照专业检索规则找到符合条件的文献，故接入了官方PubMed的数据库，帮助用户降低海量文献筛选与理解成本，提升医学证据获取效率。</p>
-          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("pubmed-hero.png"), "PubMed 检索首页")}>
-            <img src={xlImg("pubmed-hero.png")} alt="PubMed 检索首页" />
+          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("pubmed-hero.webp"), "PubMed 检索首页")}>
+            <img loading="lazy" decoding="async" src={xlImg("pubmed-hero.webp")} alt="PubMed 检索首页" />
           </button>
           <div className="xiaoluo-copy-block">
             <h4>a. 采用左筛选+右结果的科研检索经典心智模型</h4>
             <p>结果卡片上通过结构化元数据，以高信息密度展示重点信息，帮助用户快速判断文献价值。</p>
             <h4>b. 提供 AI 便捷跳转入口，一键跳转至详情页并定位于 PDF解读模式，压缩任务链路</h4>
           </div>
-          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("pubmed-result.png"), "PubMed 检索结果")}>
-            <img src={xlImg("pubmed-result.png")} alt="PubMed 检索结果" />
+          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("pubmed-result.webp"), "PubMed 检索结果")}>
+            <img loading="lazy" decoding="async" src={xlImg("pubmed-result.webp")} alt="PubMed 检索结果" />
           </button>
           <p className="xiaoluo-question">🤔 面对高专业门槛的医学文献，我们如何帮助用户快速提炼关键信息，提升文献阅读与研究决策效率？</p>
           <h3>嵌入 AI 辅助阅读助手</h3>
           <p>在详情页中保持论文原文/PDF作为主要内容区，将AI放置在侧边作为辅助层，让用户可以一边阅读原始材料，一边获取AI总结和延伸分析。</p>
-          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("pubmed-detail.png"), "PubMed 文献详情 AI 辅助阅读")}>
-            <img src={xlImg("pubmed-detail.png")} alt="PubMed 文献详情 AI 辅助阅读" />
+          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("pubmed-detail.webp"), "PubMed 文献详情 AI 辅助阅读")}>
+            <img loading="lazy" decoding="async" src={xlImg("pubmed-detail.webp")} alt="PubMed 文献详情 AI 辅助阅读" />
           </button>
         </section>
 
@@ -2224,13 +2224,13 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
           <div className="xiaoluo-blue-title"><span>03</span><strong>AI智能检索</strong></div>
           <p>医学科研人员在文献检索过程中，通常需要经历问题拆解、关键词组合、文献筛选、内容阅读和结论整理等多个步骤。传统 PubMed 检索具有较高的专业门槛，而通用 AI 工具生成的答案又缺少稳定的证据追溯能力。</p>
           <p>因此，我们设计了PubMed 专业检索与 AI 智能检索两种模式：<strong>前者保留专业用户对检索策略和原始结果的检索需求，后者通过自然语言理解和大模型能力降低研究门槛</strong>。</p>
-          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("ai-search-flow.png"), "AI 智能检索流程")}>
-            <img src={xlImg("ai-search-flow.png")} alt="AI 智能检索流程" />
+          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("ai-search-flow.webp"), "AI 智能检索流程")}>
+            <img loading="lazy" decoding="async" src={xlImg("ai-search-flow.webp")} alt="AI 智能检索流程" />
           </button>
           <p className="xiaoluo-question">🤔 我们如何在提升检索和阅读效率的同时，保证医学内容的专业可信度？</p>
           <div className="xiaoluo-feature-row">
-            <button type="button" onClick={() => openZoom(xlImg("ai-search-low-barrier.png"), "降低检索门槛")}>
-              <img src={xlImg("ai-search-low-barrier.png")} alt="降低检索门槛" />
+            <button type="button" onClick={() => openZoom(xlImg("ai-search-low-barrier.webp"), "降低检索门槛")}>
+              <img loading="lazy" decoding="async" src={xlImg("ai-search-low-barrier.webp")} alt="降低检索门槛" />
             </button>
             <div>
               <h3>降低检索门槛</h3>
@@ -2244,16 +2244,16 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
               <p>通过引用编号建立结论和证据之间的对应关系，增强用户对 AI 结果的信任；</p>
               <p>同时允许用户增删文献并重新生成，保留用户对证据范围的控制权。</p>
             </div>
-            <button type="button" onClick={() => openZoom(xlImg("ai-search-evidence.png"), "保证证据可追溯")}>
-              <img src={xlImg("ai-search-evidence.png")} alt="保证证据可追溯" />
+            <button type="button" onClick={() => openZoom(xlImg("ai-search-evidence.webp"), "保证证据可追溯")}>
+              <img loading="lazy" decoding="async" src={xlImg("ai-search-evidence.webp")} alt="保证证据可追溯" />
             </button>
           </div>
         </section>
 
         <section id="xl-result" className="xiaoluo-section xiaoluo-result">
           <h2>项目成果</h2>
-          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("result-banner.png"), "项目成果")}>
-            <img src={xlImg("result-banner.png")} alt="项目成果" />
+          <button type="button" className="xiaoluo-large-shot" onClick={() => openZoom(xlImg("result-banner.webp"), "项目成果")}>
+            <img loading="lazy" decoding="async" src={xlImg("result-banner.webp")} alt="项目成果" />
           </button>
           <p>在有限的项目周期内，首次以乙方视角介入项目，面对严格的交付时间和较高的客户期望，最终和团队紧密协作，保障了高保真方案的完美落地，得到了客户的高度认可，并直接促成了我们与该企业的二期合作，孵化出了专注于医疗垂直领域的 AI 内容生成平台——神笔小罗。</p>
         </section>
@@ -2272,11 +2272,11 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
         <section id="shenbi-coop" className="xiaoluo-section shenbi-section">
           <h2>项目合作模式</h2>
           <p className="shenbi-section-copy">该项目是出自另一个部门的客户，他们有自己的设计师，所以合作模式更为复杂，涉及更多协调沟通工作。首先对方设计师会根据我方产品跟客户沟通后产出的 prd ，来梳理出50% 的大概框架的低保真交互稿，我们再完善剩下的交互细节+视觉设计，定期在群内汇报进度，对方设计和负责人审核通过后再进入研发。期间需要不断的和上下游对齐需求，沟通排期和实现问题。</p>
-          <button type="button" className="shenbi-shot shenbi-coop-shot" onClick={() => openZoom(xlImg("shenbi-coop-1.png"), "神笔小罗项目合作模式")}>
-            <img src={xlImg("shenbi-coop-1.png")} alt="神笔小罗项目合作模式" />
+          <button type="button" className="shenbi-shot shenbi-coop-shot" onClick={() => openZoom(xlImg("shenbi-coop-1.webp"), "神笔小罗项目合作模式")}>
+            <img loading="lazy" decoding="async" src={xlImg("shenbi-coop-1.webp")} alt="神笔小罗项目合作模式" />
           </button>
-          <button type="button" className="shenbi-shot shenbi-coop-flow" onClick={() => openZoom(xlImg("shenbi-coop-2.png"), "神笔小罗协作流程")}>
-            <img src={xlImg("shenbi-coop-2.png")} alt="神笔小罗协作流程" />
+          <button type="button" className="shenbi-shot shenbi-coop-flow" onClick={() => openZoom(xlImg("shenbi-coop-2.webp"), "神笔小罗协作流程")}>
+            <img loading="lazy" decoding="async" src={xlImg("shenbi-coop-2.webp")} alt="神笔小罗协作流程" />
           </button>
         </section>
 
@@ -2284,13 +2284,13 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
           <h2>项目概览</h2>
           <div className="shenbi-overview-board">
             {[
-              ["shenbi-overview-1.png", "神笔小罗首页"],
-              ["shenbi-overview-2.png", "神笔小罗幻灯生成"],
-              ["shenbi-overview-3.png", "神笔小罗内容编辑"],
-              ["shenbi-overview-4.png", "神笔小罗移动物料"]
+              ["shenbi-overview-1.webp", "神笔小罗首页"],
+              ["shenbi-overview-2.webp", "神笔小罗幻灯生成"],
+              ["shenbi-overview-3.webp", "神笔小罗内容编辑"],
+              ["shenbi-overview-4.webp", "神笔小罗移动物料"]
             ].map(([name, alt]) => (
               <button key={name} type="button" className="shenbi-shot" onClick={() => openZoom(xlImg(name), alt)}>
-                <img src={xlImg(name)} alt={alt} />
+                <img loading="lazy" decoding="async" src={xlImg(name)} alt={alt} />
               </button>
             ))}
           </div>
@@ -2587,6 +2587,8 @@ function AIImage({ src, alt, onZoom, className = "" }) {
       className={className}
       src={src}
       alt={alt}
+      loading="lazy"
+      decoding="async"
       draggable={false}
       role="button"
       tabIndex={0}
@@ -2693,8 +2695,8 @@ function AISenseclawCompare({ onZoom }) {
     const clickPercent = rect ? ((event.clientX - rect.left) / rect.width) * 100 : 50;
     const isBefore = clickPercent <= split;
     onZoom(isBefore
-      ? { src: "/assets/ai/senseclaw-before.png", alt: "SenseClaw 研发内部使用的原始界面" }
-      : { src: "/assets/ai/senseclaw-after.png", alt: "SenseClaw Bots 平台规范化改造后界面" });
+      ? { src: "/assets/ai/senseclaw-before.webp", alt: "SenseClaw 研发内部使用的原始界面" }
+      : { src: "/assets/ai/senseclaw-after.webp", alt: "SenseClaw Bots 平台规范化改造后界面" });
   };
 
   return (
@@ -2708,11 +2710,11 @@ function AISenseclawCompare({ onZoom }) {
         aria-label="拖动查看 SenseClaw 改造前后对比，点击查看大图"
         onClick={openSide}
         onKeyDown={(event) => {
-          if (event.key === "Enter") onZoom({ src: "/assets/ai/senseclaw-after.png", alt: "SenseClaw Bots 平台规范化改造后界面" });
+          if (event.key === "Enter") onZoom({ src: "/assets/ai/senseclaw-after.webp", alt: "SenseClaw Bots 平台规范化改造后界面" });
         }}
       >
-        <img src="/assets/ai/senseclaw-after.png" alt="SenseClaw 改造后" draggable={false} />
-        <div className="ai-compare-before"><img src="/assets/ai/senseclaw-before.png" alt="SenseClaw 改造前" draggable={false} /></div>
+        <img src="/assets/ai/senseclaw-after.webp" alt="SenseClaw 改造后" draggable={false} />
+        <div className="ai-compare-before"><img src="/assets/ai/senseclaw-before.webp" alt="SenseClaw 改造前" draggable={false} /></div>
         <div className="ai-compare-divider" style={{ left: `${split}%` }} />
         <button
           type="button"
@@ -2846,19 +2848,19 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
           <p className="section-copy">AI Chat 组件库来自 Bots 与小罗智多星两个项目中的实际设计和交付。两个项目虽有不同的业务目标与使用场景，却持续出现相似的对话体验问题。与此同时，各大厂商也在持续更新 AI Chat 组件体系，以适应生成式 AI 带来的新交互形态，因此我们也开始着手搭建自己的组件库。</p>
           <div className="ai-project-case-grid">
             <article>
-              <div className="ai-project-case-media"><AIImage src="/assets/ai/xiaoluo-chat-project.png" alt="小罗智多星文献解读与 AI 对话项目界面" onZoom={setZoom} /></div>
+              <div className="ai-project-case-media"><AIImage src="/assets/ai/xiaoluo-chat-project.webp" alt="小罗智多星文献解读与 AI 对话项目界面" onZoom={setZoom} /></div>
             </article>
             <article>
-              <div className="ai-project-case-media"><AIImage src="/assets/ai/bots-chat-project.png" alt="Bots 对话机器人配置与调试项目界面" onZoom={setZoom} /></div>
+              <div className="ai-project-case-media"><AIImage src="/assets/ai/bots-chat-project.webp" alt="Bots 对话机器人配置与调试项目界面" onZoom={setZoom} /></div>
             </article>
           </div>
           <p className="section-copy">团队基于两个项目的实践建设 AI Chat 组件库，并将其落地为可访问的前端组件网站。我主要负责 Chat 输入框模块，重点梳理输入区域、操作入口和发送控制之间的关系，同时覆盖默认、聚焦、生成、禁用和异常等状态。</p>
           <figure className="ai-evidence-figure ai-chat-evidence">
-            <AIImage src="/assets/ai/ai-chat-input-system.png" alt="AI Chat 输入框组件规范、使用方式与移动端交互方案" onZoom={setZoom} />
+            <AIImage src="/assets/ai/ai-chat-input-system.webp" alt="AI Chat 输入框组件规范、使用方式与移动端交互方案" onZoom={setZoom} />
             <figcaption>输入框基础规范、色彩与间距、上传、语音和移动端交互模式</figcaption>
           </figure>
           <figure className="ai-evidence-figure ai-component-site-evidence">
-            <AIImage src="/assets/ai/component-library-site.png" alt="SenseCare UI 前端组件库 Sender 输入框组件站点" onZoom={setZoom} />
+            <AIImage src="/assets/ai/component-library-site.webp" alt="SenseCare UI 前端组件库 Sender 输入框组件站点" onZoom={setZoom} />
             <figcaption>设计规范同步落地为前端组件站点，支持团队直接查看组件能力与调用方式</figcaption>
           </figure>
           <div className="ai-metric-panel" aria-label="AI Chat 组件应用数据">
@@ -2875,7 +2877,7 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
             <blockquote>AI 帮助我快速搭出约 60% 的基础，剩余部分仍需设计师手动调整，达到可直接使用的 Figma 组件标准。</blockquote>
           </div>
           <figure className="ai-evidence-figure ai-foundation-evidence">
-            <AIImage src="/assets/ai/design-system-overview.png" alt="设计规范中的色彩、字体、间距、阴影、圆角与组件示例" onZoom={setZoom} />
+            <AIImage src="/assets/ai/design-system-overview.webp" alt="设计规范中的色彩、字体、间距、阴影、圆角与组件示例" onZoom={setZoom} />
             <figcaption>从色彩、字体到间距、阴影和组件状态的基础设计规范</figcaption>
           </figure>
         </section>
@@ -2906,7 +2908,7 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
                 <h3>从需求梳理走到代码交付</h3>
                 <p>随着实践深入，流程不再停留在“生成一个原型”，而是覆盖需求梳理、Prompt、方案比较、人工收敛和代码交付。我整理了相关提示词与流程，并在组会上向团队内部成员分享，让这套方法能够在后续项目中复用。最终产物是 Figma Make 代码包，前端可在此基础上继续完成接口对接，并保持较高的设计还原度。</p>
                 <figure className="ai-evidence-figure ai-prompt-evidence">
-                  <AIImage src="/assets/ai/prompt-workflow-reference.png" alt="设计公共 Prompt 与模板资产库" onZoom={setZoom} />
+                  <AIImage src="/assets/ai/prompt-workflow-reference.webp" alt="设计公共 Prompt 与模板资产库" onZoom={setZoom} />
                 </figure>
                 <figure className="ai-prototype-flow" aria-label="Figma Make 原型与代码交付流程">
                   <ol>
@@ -3296,8 +3298,8 @@ function App() {
         </Draggable>
         </div>
 
-        <Draggable className="cloud cloud-large" aria-hidden="true"><img src={asset("cloud.png")} alt="" /></Draggable>
-        <Draggable className="cloud cloud-small" aria-hidden="true"><img src={asset("cloud.png")} alt="" /></Draggable>
+        <Draggable className="cloud cloud-large" aria-hidden="true"><img src={asset("cloud.webp")} alt="" /></Draggable>
+        <Draggable className="cloud cloud-small" aria-hidden="true"><img src={asset("cloud.webp")} alt="" /></Draggable>
 
         <Draggable
           className="tree tree-a"
@@ -3308,7 +3310,7 @@ function App() {
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") setBeeBurstKey((key) => key + 1);
           }}
-        ><img src={asset("tree.png")} alt="" /></Draggable>
+        ><img src={asset("tree.webp")} alt="" /></Draggable>
         <Draggable
           className="tree tree-b"
           role="button"
@@ -3318,7 +3320,7 @@ function App() {
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") setBeeBurstKey((key) => key + 1);
           }}
-        ><img src={asset("tree.png")} alt="" /></Draggable>
+        ><img src={asset("tree.webp")} alt="" /></Draggable>
         <BeeBurst burstKey={beeBurstKey} />
         <PixelCowCat />
       </div>
