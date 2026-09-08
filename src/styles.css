@@ -430,6 +430,46 @@ a { color: inherit; }
   will-change: transform;
 }
 .pixel-cat-runner:active { cursor: grabbing; }
+.pixel-cat-speech {
+  position: absolute;
+  left: 42px;
+  bottom: 49px;
+  z-index: 2;
+  display: block;
+  padding: 5px 7px 4px;
+  border: 2px solid #303238;
+  border-radius: 4px;
+  color: #303238;
+  background: #fffdf4;
+  box-shadow: 3px 3px 0 rgba(48, 50, 56, .18);
+  font: 700 10px/1 "Courier New", monospace;
+  letter-spacing: -.02em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-5px, 6px) scale(.72) rotate(-3deg);
+  transform-origin: 8px 100%;
+  transition: opacity 100ms ease-out, transform 260ms cubic-bezier(.16, 1.35, .3, 1);
+  white-space: nowrap;
+}
+.pixel-cat-speech::after {
+  position: absolute;
+  left: 7px;
+  bottom: -6px;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid #303238;
+  border-bottom: 2px solid #303238;
+  background: #fffdf4;
+  content: "";
+  transform: rotate(45deg);
+}
+.pixel-cat-runner.is-held .pixel-cat-speech {
+  opacity: 1;
+  transform: translate(0, 0) scale(1) rotate(-2deg);
+}
+.pixel-cat-runner.is-held .pixel-cat-sprite {
+  filter: drop-shadow(0 4px 0 rgba(49, 75, 91, .13)) saturate(1.06);
+}
 .pixel-cat-sprite {
   display: block;
   width: 76px;
@@ -445,8 +485,9 @@ a { color: inherit; }
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(34, 56, 93, .24);
-  backdrop-filter: blur(6px);
+  contain: paint;
+  background: rgba(34, 56, 93, .32);
+  cursor: default;
 }
 
 .folder-window {
@@ -564,7 +605,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .life-title mark {
   display: inline-block;
   padding: 0 .025em;
-  background: linear-gradient(to bottom, transparent 0 17%, var(--life-ink) 17% 84%, transparent 84% 100%);
+  background: linear-gradient(to bottom, transparent 0 20%, var(--life-ink) 20% 81%, transparent 81% 100%);
   line-height: 1;
   letter-spacing: -.04em;
   vertical-align: 0;
@@ -574,7 +615,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   position: absolute;
   inset: 0;
   color: var(--life-paper);
-  clip-path: inset(17% 0 16% 0);
+  clip-path: inset(20% 0 19% 0);
   content: attr(data-text);
   pointer-events: none;
 }
@@ -631,11 +672,11 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   place-items: center;
   padding-left: clamp(64px, 7vw, 112px);
   isolation: isolate;
-  background: rgba(239, 247, 241, .42);
-  border-left: 1px solid rgba(255, 255, 255, .72);
-  box-shadow: inset 1px 0 rgba(255,255,255,.36), inset 0 1px rgba(255,255,255,.2);
-  backdrop-filter: blur(13px) saturate(112%);
-  -webkit-backdrop-filter: blur(13px) saturate(112%);
+  background: rgba(239, 247, 241, .34);
+  border-left: 1px solid rgba(255, 255, 255, .82);
+  box-shadow: inset 1px 0 rgba(255,255,255,.46), inset 0 1px rgba(255,255,255,.26);
+  backdrop-filter: blur(18px) saturate(116%);
+  -webkit-backdrop-filter: blur(18px) saturate(116%);
 }
 .life-film-stage::before {
   position: absolute;
@@ -1558,6 +1599,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   .resume-shortcut:hover .home-resume-notepad { transform: none; }
   .resume-shortcut:hover > span { transform: none; }
   .pixel-bee { animation-duration: .01ms; }
+  .pixel-cat-speech { transition-duration: .01ms; }
 }
 
 .ai-aigc-carousel {

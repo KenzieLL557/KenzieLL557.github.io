@@ -577,8 +577,8 @@ function FigmaFolder({ className, variant, label, onOpen }) {
         )}
         {variant === "life" && (
           <>
-            <i className="folder-sheet folder-sheet-back"><img src="/assets/life/user-photos/life-aquarium.webp" alt="" loading="lazy" decoding="async" /></i>
-            <i className="folder-sheet folder-sheet-middle"><img src="/assets/life/user-photos/life-tea-mountains.webp" alt="" loading="lazy" decoding="async" /></i>
+            <i className="folder-sheet folder-sheet-back"><img src="/assets/life/user-photos/life-seaside-sunset.webp" alt="" loading="lazy" decoding="async" /></i>
+            <i className="folder-sheet folder-sheet-middle"><img src="/assets/life/user-photos/life-snow-cycling.webp" alt="" loading="lazy" decoding="async" /></i>
             <i className="folder-cover folder-cover-life">
               <img src={asset("life-mango.webp")} alt="" />
             </i>
@@ -644,7 +644,7 @@ function removeConnectedSpriteBackground(canvas) {
   return canvas;
 }
 
-function PixelCowCat() {
+function PixelCowCat({ paused = false }) {
   const canvasRef = useRef(null);
   const laneRef = useRef(null);
   const draggingRef = useRef(false);
@@ -652,6 +652,7 @@ function PixelCowCat() {
   const catX = useMotionValue(0);
   const catY = useMotionValue(0);
   const shouldReduceMotion = useReducedMotion();
+  const [isHeld, setIsHeld] = useState(false);
   const [catDragConstraints, setCatDragConstraints] = useState({ left: 0, right: 820, top: -760, bottom: 0 });
 
   useEffect(() => {
@@ -673,7 +674,7 @@ function PixelCowCat() {
   }, []);
 
   useEffect(() => {
-    if (shouldReduceMotion) return undefined;
+    if (shouldReduceMotion || paused) return undefined;
     let frameRequest;
     let previousTime = performance.now();
     const patrol = (now) => {
@@ -696,7 +697,7 @@ function PixelCowCat() {
     };
     frameRequest = requestAnimationFrame(patrol);
     return () => cancelAnimationFrame(frameRequest);
-  }, [catDragConstraints.right, catX, shouldReduceMotion]);
+  }, [catDragConstraints.right, catX, paused, shouldReduceMotion]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -732,7 +733,7 @@ function PixelCowCat() {
       const drawFrame = (now = startedAt) => {
         const elapsed = Math.max(0, now - startedAt);
         const directionOffset = directionRef.current > 0 ? 0 : 4;
-        const walkFrame = Math.floor(elapsed / CAT_FRAME_DURATION) % 4;
+        const walkFrame = draggingRef.current || paused ? 0 : Math.floor(elapsed / CAT_FRAME_DURATION) % 4;
         const source = preparedFrames[directionOffset + walkFrame] || preparedFrames[0];
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.imageSmoothingEnabled = false;
@@ -746,7 +747,7 @@ function PixelCowCat() {
           drawWidth,
           drawHeight
         );
-        if (!reducedMotion && !disposed) frameRequest = requestAnimationFrame(drawFrame);
+        if (!paused && !reducedMotion && !disposed) frameRequest = requestAnimationFrame(drawFrame);
       };
 
       drawFrame();
@@ -757,26 +758,28 @@ function PixelCowCat() {
       disposed = true;
       if (frameRequest) cancelAnimationFrame(frameRequest);
     };
-  }, []);
+  }, [paused]);
 
   return (
     <div ref={laneRef} className="pixel-cat-patrol" aria-label="可以拖动的像素小猫">
       <motion.div
-        className="pixel-cat-runner"
+        className={`pixel-cat-runner ${isHeld ? "is-held" : ""}`}
         style={{ x: catX, y: catY }}
         drag
         dragConstraints={catDragConstraints}
         dragElastic={0.06}
         dragMomentum={false}
-        whileDrag={{ scale: 1.04 }}
+        whileDrag={{ scale: 1.08, rotate: -3 }}
         onDragStart={() => {
           draggingRef.current = true;
+          setIsHeld(true);
         }}
         onDrag={(_, info) => {
           if (Math.abs(info.delta.x) > 0.05) directionRef.current = info.delta.x > 0 ? 1 : -1;
         }}
         onDragEnd={() => {
           draggingRef.current = false;
+          setIsHeld(false);
           catX.set(Math.min(catDragConstraints.right, Math.max(0, catX.get())));
           if (shouldReduceMotion) {
             catY.set(0);
@@ -785,6 +788,7 @@ function PixelCowCat() {
           }
         }}
       >
+        <span className="pixel-cat-speech" aria-hidden="true">Meow~</span>
         <canvas ref={canvasRef} className="pixel-cat-sprite" width="180" height="132" />
       </motion.div>
     </div>
@@ -3332,7 +3336,7 @@ function App() {
           }}
         ><img src={asset("tree.webp")} alt="" /></Draggable>
         <BeeBurst burstKey={beeBurstKey} />
-        <PixelCowCat />
+        <PixelCowCat paused={Boolean(openedFolder || resumeOpen || activeProject)} />
       </div>
       <AnimatePresence>
         {openedFolder === "life" && !activeProject && (
