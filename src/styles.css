@@ -284,8 +284,16 @@ a { color: inherit; }
 .folder-cover-work b { font-size: 21px; font-weight: 500; letter-spacing: -.45px; line-height: 24px; }
 .folder-cover-work span { font-size: 12px; font-weight: 500; line-height: 15px; }
 
-.folder-stack-life .folder-sheet-back { background: #f4cf3f; }
-.folder-stack-life .folder-sheet-middle { background: #d7f4c3; }
+.folder-stack-life .folder-sheet-back { overflow: hidden; background: #264959; }
+.folder-stack-life .folder-sheet-middle { overflow: hidden; background: #b9dbb6; }
+.folder-stack-life .folder-sheet img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
 .folder-cover-life { background: #324c2c; }
 .folder-cover-life img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; }
 
@@ -548,7 +556,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .life-scroll-track { display: flex; width: max-content; min-width: 100%; height: 100%; min-height: 0; user-select: none; -webkit-user-drag: none; }
 .life-scroll-track img { -webkit-user-drag: none; }
 .life-intro-panel { position: relative; flex: 0 0 69.45vw; width: 69.45vw; height: 100%; min-height: 0; overflow: hidden; background: transparent; }
-.life-intro-content { position: absolute; top: clamp(64px, 10.34vh, 93px); left: clamp(34px, 7.1%, 71px); width: 86%; }
+.life-intro-content { position: absolute; top: 50%; left: clamp(34px, 7.1%, 71px); width: 86%; transform: translateY(-50%); }
 .life-profile-photo { display: block; width: clamp(160px, min(28.1vh, 17.57vw), 253px); height: auto; object-fit: contain; }
 .life-greeting { margin: clamp(8px, 1.55vh, 14px) 0 0; color: var(--life-ink); font: 400 clamp(17px, 1.667vw, 24px)/1.6667 Epilogue, sans-serif; }
 .life-title { display: grid; margin: clamp(18px, 2.67vh, 24px) 0 0; color: var(--life-ink); font: 400 clamp(40px, 4.45vw, 64px)/1.075 Epilogue, sans-serif; letter-spacing: -.035em; }
@@ -556,7 +564,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .life-title mark {
   display: inline-block;
   padding: 0 .025em;
-  background: linear-gradient(to bottom, transparent 0 22%, var(--life-ink) 22% 78%, transparent 78% 100%);
+  background: linear-gradient(to bottom, transparent 0 17%, var(--life-ink) 17% 84%, transparent 84% 100%);
   line-height: 1;
   letter-spacing: -.04em;
   vertical-align: 0;
@@ -566,7 +574,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   position: absolute;
   inset: 0;
   color: var(--life-paper);
-  clip-path: inset(22% 0 22% 0);
+  clip-path: inset(17% 0 16% 0);
   content: attr(data-text);
   pointer-events: none;
 }
@@ -623,10 +631,11 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   place-items: center;
   padding-left: clamp(64px, 7vw, 112px);
   isolation: isolate;
-  background: rgba(229, 241, 232, .26);
-  border-left: 1px solid rgba(255, 255, 255, .44);
-  backdrop-filter: blur(8px) saturate(96%);
-  -webkit-backdrop-filter: blur(8px) saturate(96%);
+  background: rgba(239, 247, 241, .42);
+  border-left: 1px solid rgba(255, 255, 255, .72);
+  box-shadow: inset 1px 0 rgba(255,255,255,.36), inset 0 1px rgba(255,255,255,.2);
+  backdrop-filter: blur(13px) saturate(112%);
+  -webkit-backdrop-filter: blur(13px) saturate(112%);
 }
 .life-film-stage::before {
   position: absolute;
@@ -823,6 +832,19 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   transform: translateX(-120%);
   transition: transform 520ms cubic-bezier(.22, 1, .36, 1), opacity 180ms ease;
 }
+.film-exposure::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(105deg, #292722 20%, #3c3932 38%, #292722 56%);
+  background-size: 220% 100%;
+  content: "";
+  opacity: 1;
+  pointer-events: none;
+  animation: image-loading-sheen 1.25s ease-in-out infinite;
+  transition: opacity 280ms ease;
+}
+.film-exposure.is-loaded::before { opacity: 0; animation: none; }
 .film-frame img {
   display: block;
   width: 100%;
@@ -830,8 +852,10 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   object-fit: contain;
   pointer-events: none;
   transform: scale(1);
-  transition: transform 420ms cubic-bezier(.22, 1, .36, 1), filter 320ms ease;
+  opacity: 0;
+  transition: opacity 340ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1), filter 320ms ease;
 }
+.film-exposure.is-loaded img { opacity: 1; }
 .film-frame:hover img { filter: saturate(1.04) brightness(1.035); transform: scale(1); }
 .film-frame:hover .film-exposure::after { opacity: .72; transform: translateX(120%); }
 .film-frame figcaption {
@@ -1245,8 +1269,8 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   place-items: center;
   overflow: hidden;
   background:
-    radial-gradient(circle at 74% 18%, rgba(112, 130, 255, .24), transparent 28%),
-    linear-gradient(145deg, #161720, #08090e 68%);
+    radial-gradient(circle at 74% 18%, rgba(112, 130, 255, .12), transparent 28%),
+    linear-gradient(145deg, #121417, #08090b 68%);
 }
 .folder-file-cover-aesthetic-index::before {
   position: absolute;
@@ -1257,29 +1281,49 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .aesthetic-index-cover-logo {
   position: relative;
   z-index: 1;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: #f6f3e9;
   transition: transform 420ms cubic-bezier(.22, 1, .36, 1);
 }
-.aesthetic-index-cover-logo b {
-  overflow: visible;
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: clamp(34px, 4vw, 54px);
-  font-weight: 500;
-  letter-spacing: .18em;
+.aesthetic-index-cover-logo strong {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 650;
+  letter-spacing: .04em;
   line-height: 1;
-  text-indent: .18em;
   white-space: nowrap;
 }
 .aesthetic-index-cover-logo i {
-  margin-top: 14px;
-  color: rgba(246, 243, 233, .58);
-  font-family: Inter, sans-serif;
-  font-size: 9px;
-  font-style: normal;
-  letter-spacing: .42em;
-  text-indent: .42em;
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 38px;
+  transform: rotate(-2deg);
+}
+.aesthetic-index-cover-logo i::before,
+.aesthetic-index-cover-logo i::after {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 28px;
+  background: currentColor;
+  clip-path: polygon(0 18%, 100% 0, 100% 82%, 0 100%);
+  content: "";
+}
+.aesthetic-index-cover-logo i::before { top: 0; left: 0; }
+.aesthetic-index-cover-logo i::after { right: 0; bottom: 0; }
+.aesthetic-index-cover-logo i b {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 1;
+  display: block;
+  width: 7px;
+  height: 11px;
+  background: #0a0c0d;
+  clip-path: polygon(0 18%, 100% 0, 100% 82%, 0 100%);
 }
 .folder-file:hover .aesthetic-index-cover-logo { transform: scale(1.045); }
 .folder-file-copy { display: block; width: 100%; min-width: 0; padding: 15px 7px 9px; }
@@ -6019,6 +6063,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .resume-icon-action[data-tooltip]:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
 
 .resume-pdf-stage {
+  position: relative;
   min-height: 0;
   overflow: auto;
   padding: 24px clamp(24px, 3vw, 48px) 36px;
@@ -6026,6 +6071,18 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   scrollbar-color: rgba(18, 19, 21, .22) transparent;
   scrollbar-gutter: stable;
 }
+.resume-pdf-stage::before {
+  position: absolute;
+  inset: 24px clamp(24px, 3vw, 48px) auto;
+  height: min(74%, 620px);
+  border-radius: 4px;
+  background: linear-gradient(105deg, #f2f4f6 20%, #fafbfc 38%, #f2f4f6 56%);
+  background-size: 220% 100%;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+}
+.resume-pdf-stage.is-loading::before { opacity: 1; animation: image-loading-sheen 1.25s ease-in-out infinite; }
 
 .resume-document-canvas {
   min-width: 60%;
@@ -6043,7 +6100,12 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   border-radius: 0;
   background: #fff;
   box-shadow: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
 }
+.resume-pdf-stage.is-loaded .resume-document-image { opacity: 1; }
+
+@keyframes image-loading-sheen { to { background-position: -220% 0; } }
 
 .resume-empty-page {
   width: min(470px, 100%);

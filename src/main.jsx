@@ -44,8 +44,8 @@ const CAT_SPRITE_FRAMES = [
 const CAT_PATROL_DURATION = 28000;
 const CAT_FRAME_DURATION = 165;
 const LIFE_PHOTOS = [
+  // Green landscapes
   ["c3421d9d97032cac95431e73b16b5305.webp", "Cliff valley walk"],
-  ["11268f2db03c5ce4efb7d95d780672a8.webp", "Mountain road under clouds"],
   ["80e15d77245fbae533b3ecc659e92a8f.webp", "Terraced fields in the mist"],
   ["31e0d4286c938a58c7125563aa3134f6.webp", "A quiet bench in the woods"],
   ["437b610595fb3ca76229f044b8ead688.webp", "Walking beneath a great tree"],
@@ -54,13 +54,17 @@ const LIFE_PHOTOS = [
   ["909e6de8ca3866f94c43705e1cd8065e.webp", "Autumn trees by the water"],
   ["life-tropical-forest.webp", "Sunlight through a tropical forest"],
   ["life-tea-mountains.webp", "Tea fields beneath misty mountains"],
-  ["life-mountain-road.webp", "A quiet road beneath stormy mountains"],
-  ["life-snow-cycling.webp", "Cyclists crossing a snowy mountain pass"],
-  ["life-seaside-sunset.webp", "Watching the sunset by the sea"],
-  ["life-blue-sky-tree.webp", "A winter tree against the blue sky"],
   ["a8e25e4545e3b1bfd01bcfc668b39a47.webp", "Small white flowers"],
   ["ba72c9235a99df64ee982bc760e7523b.webp", "A figure in a green garden"],
   ["4bc6f662f1a7d1d9934829d9634895f4.webp", "Sunset rower on the lake"],
+  // Cool mountains, cycling and open skies
+  ["11268f2db03c5ce4efb7d95d780672a8.webp", "Mountain road under clouds"],
+  ["life-mountain-road.webp", "A quiet road beneath stormy mountains"],
+  ["life-snow-cycling.webp", "Cyclists crossing a snowy mountain pass"],
+  ["life-cycling-bike.webp", "A cycling day in yellow"],
+  ["life-seaside-sunset.webp", "Watching the sunset by the sea"],
+  ["life-blue-sky-tree.webp", "A winter tree against the blue sky"],
+  // City observations
   ["5fab4c2c7f4be7e1c00ae385a613e822.webp", "A quiet urban moment"],
   ["fbf10f2c0de46937a3a2dbd702ea8403.webp", "The duck keeper"],
   ["de03c7c33596c6a66562c17eb3f553e6.webp", "Crossing an old city street"],
@@ -70,9 +74,9 @@ const LIFE_PHOTOS = [
   ["bd800f217b495034771e5ae1db9d755c.webp", "Night street lights"],
   ["C4B05D2B-287B-40F2-B993-8A5670224187.webp", "City evening in film color"],
   ["life-hongkong-street.webp", "Red taxis on a Hong Kong street"],
+  // Indoor memories and personal interests
   ["life-church-window.webp", "Light through a stained-glass window"],
   ["life-aquarium.webp", "Fish drifting through blue water"],
-  ["life-cycling-bike.webp", "A cycling day in yellow"],
   ["life-music-player.webp", "A favorite album and music player"],
   ["life-new-yorker-puzzle.webp", "A finished New Yorker winter puzzle"],
   ["17e5de604d0d608f885d80310065fddb.webp", "Records in a late-night shop"]
@@ -573,8 +577,8 @@ function FigmaFolder({ className, variant, label, onOpen }) {
         )}
         {variant === "life" && (
           <>
-            <i className="folder-sheet folder-sheet-back" />
-            <i className="folder-sheet folder-sheet-middle" />
+            <i className="folder-sheet folder-sheet-back"><img src="/assets/life/user-photos/life-aquarium.webp" alt="" loading="lazy" decoding="async" /></i>
+            <i className="folder-sheet folder-sheet-middle"><img src="/assets/life/user-photos/life-tea-mountains.webp" alt="" loading="lazy" decoding="async" /></i>
             <i className="folder-cover folder-cover-life">
               <img src={asset("life-mango.webp")} alt="" />
             </i>
@@ -927,6 +931,7 @@ function FilmCanister() {
 
 function FilmFrame({ photo, ratio, onResolveRatio, onOpen }) {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [naturalRatio, setNaturalRatio] = useState(null);
   const geometry = getFilmFrameWidth(ratio);
   const frameNumber = 23 + photo.frameNumber;
@@ -941,7 +946,7 @@ function FilmFrame({ photo, ratio, onResolveRatio, onOpen }) {
       </span>
       <button
         type="button"
-        className="film-exposure"
+        className={`film-exposure ${loaded ? "is-loaded" : "is-loading"}`}
         onClick={() => !failed && onOpen(photo)}
         aria-label={`放大查看：${photo.alt}`}
       >
@@ -955,6 +960,7 @@ function FilmFrame({ photo, ratio, onResolveRatio, onOpen }) {
             decoding="async"
             draggable="false"
             onLoad={(event) => {
+              setLoaded(true);
               setNaturalRatio(event.currentTarget.naturalWidth / event.currentTarget.naturalHeight);
               if (photo.ratio) return;
               onResolveRatio(classifyPhotoAspect(event.currentTarget.naturalWidth, event.currentTarget.naturalHeight));
@@ -1449,8 +1455,8 @@ function FolderWindow({ folder, onClose, onOpenProject }) {
                   ) : null}
                   {folder !== "work" && cover === "aesthetic-index" && (
                     <span className="aesthetic-index-cover-logo" aria-hidden="true">
-                      <b>形外</b>
-                      <i>形 · 色 · 质 · 序</i>
+                      <i><b /></i>
+                      <strong>形外</strong>
                     </span>
                   )}
                   {folder !== "work" && cover === "mango" && <img src={asset("life-mango.webp")} alt="" />}
@@ -3127,7 +3133,8 @@ function ResumeIcon() {
 
 function ResumePreviewer({ onClose }) {
   const [activeDoc, setActiveDoc] = useState(RESUME_DOCS[0].id);
-  const [zoom, setZoom] = useState(100);
+  const [zoom, setZoom] = useState(80);
+  const [previewLoaded, setPreviewLoaded] = useState(false);
   const currentDoc = RESUME_DOCS.find((doc) => doc.id === activeDoc) || RESUME_DOCS[0];
 
   const updateZoom = (nextZoom) => {
@@ -3174,7 +3181,8 @@ function ResumePreviewer({ onClose }) {
                   aria-selected={currentDoc.id === doc.id}
                   onClick={() => {
                     setActiveDoc(doc.id);
-                    setZoom(100);
+                    setZoom(80);
+                    setPreviewLoaded(false);
                   }}
                 >
                   {doc.language}
@@ -3189,12 +3197,14 @@ function ResumePreviewer({ onClose }) {
               <a className="resume-icon-action" href={currentDoc.src} target="_blank" rel="noreferrer" aria-label="在新窗口打开" data-tooltip="在新窗口打开"><Icon name="external" size={17} /></a>
             </div>
           </header>
-          <div className="resume-pdf-stage">
+          <div className={`resume-pdf-stage ${previewLoaded ? "is-loaded" : "is-loading"}`}>
             <div className="resume-document-canvas" style={{ width: `${zoom}%` }}>
               <img
                 className="resume-document-image"
                 src={currentDoc.previewSrc}
                 alt={`${currentDoc.language}简历预览`}
+                onLoad={() => setPreviewLoaded(true)}
+                decoding="async"
               />
             </div>
           </div>
@@ -3267,7 +3277,7 @@ function App() {
           <div className="product-card">
             <h1>Product Designer</h1>
             <div className="note-paper">
-              <p><strong>6</strong> years designing AI, B2B/B2C, and SaaS products across <b>healthcare, education, and enterprise.</b> Focused on end-to-end UX from research and strategy to design delivery.</p>
+              <p><strong>5+</strong> years designing AI, B2B/B2C, and SaaS products across <b>healthcare, education, and enterprise.</b> Focused on end-to-end UX from research and strategy to design delivery.</p>
             </div>
           </div>
         </Draggable>
