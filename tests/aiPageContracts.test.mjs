@@ -282,6 +282,7 @@ test("Life opens as a full-screen Figma-based page with uncropped photo frames",
   assert.match(styles, /\.film-exposure\s*\{[^}]*border-radius:\s*0;/s);
   assert.doesNotMatch(styles, /grid-template-columns:\s*repeat\(6, var\(--film-hole-size\)\)/);
   assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.42\);[^}]*backdrop-filter:\s*blur\(24px\)\s*saturate\(122%\)/s);
+  assert.match(styles, /\.life-film-stage\s*\{[^}]*-webkit-backdrop-filter:\s*blur\(24px\)\s*saturate\(122%\);[^}]*backdrop-filter:\s*blur\(24px\)\s*saturate\(122%\)/s);
   assert.match(styles, /repeating-linear-gradient/);
   assert.match(styles, /\.film-frame img\s*\{[^}]*object-fit:\s*contain;/s);
   assert.doesNotMatch(styles, /\.film-frame img\s*\{[^}]*object-fit:\s*cover;/s);
