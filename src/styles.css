@@ -433,11 +433,11 @@ a { color: inherit; }
 .pixel-cat-speech {
   position: absolute;
   left: 42px;
-  bottom: 49px;
+  bottom: 55px;
   z-index: 2;
   display: block;
   padding: 5px 7px 4px;
-  border: 2px solid #303238;
+  border: 1px solid #303238;
   border-radius: 4px;
   color: #303238;
   background: #fffdf4;
@@ -454,11 +454,11 @@ a { color: inherit; }
 .pixel-cat-speech::after {
   position: absolute;
   left: 7px;
-  bottom: -6px;
+  bottom: -5px;
   width: 7px;
   height: 7px;
-  border-right: 2px solid #303238;
-  border-bottom: 2px solid #303238;
+  border-right: 1px solid #303238;
+  border-bottom: 1px solid #303238;
   background: #fffdf4;
   content: "";
   transform: rotate(45deg);
@@ -605,7 +605,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .life-title mark {
   display: inline-block;
   padding: 0 .025em;
-  background: linear-gradient(to bottom, transparent 0 20%, var(--life-ink) 20% 81%, transparent 81% 100%);
+  background: linear-gradient(to bottom, transparent 0 24%, var(--life-ink) 24% 78%, transparent 78% 100%);
   line-height: 1;
   letter-spacing: -.04em;
   vertical-align: 0;
@@ -615,7 +615,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   position: absolute;
   inset: 0;
   color: var(--life-paper);
-  clip-path: inset(20% 0 19% 0);
+  clip-path: inset(24% 0 22% 0);
   content: attr(data-text);
   pointer-events: none;
 }
@@ -672,11 +672,12 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   place-items: center;
   padding-left: clamp(64px, 7vw, 112px);
   isolation: isolate;
-  background: rgba(239, 247, 241, .34);
+  background: rgba(239, 247, 241, .42);
   border-left: 1px solid rgba(255, 255, 255, .82);
   box-shadow: inset 1px 0 rgba(255,255,255,.46), inset 0 1px rgba(255,255,255,.26);
-  backdrop-filter: blur(18px) saturate(116%);
-  -webkit-backdrop-filter: blur(18px) saturate(116%);
+  backdrop-filter: blur(24px) saturate(122%);
+  -webkit-backdrop-filter: blur(24px) saturate(122%);
+  transform: translateZ(0);
 }
 .life-film-stage::before {
   position: absolute;

@@ -131,8 +131,19 @@ test("the cat reacts while held and the Life folder uses contrasting clean photo
   assert.match(source, /function PixelCowCat\(\{ paused = false \}\)/);
   assert.match(source, /className="pixel-cat-speech"[^>]*>Meow~</);
   assert.match(styles, /\.pixel-cat-runner\.is-held \.pixel-cat-speech\s*\{[^}]*opacity:\s*1;/s);
-  assert.match(source, /folder-sheet-back[^\n]*life-seaside-sunset\.webp/);
-  assert.match(source, /folder-sheet-middle[^\n]*life-snow-cycling\.webp/);
+  assert.match(source, /folder-sheet-back[^\n]*home-life-seaside\.jpg/);
+  assert.match(source, /folder-sheet-middle[^\n]*home-life-snow\.jpg/);
+  assert.match(source, /folder-cover-life[\s\S]{0,180}home-life-film-03\.jpg/);
+  assert.match(styles, /\.pixel-cat-speech\s*\{[^}]*bottom:\s*55px;[^}]*border:\s*1px solid/s);
+});
+
+test("homepage and Life gallery defer heavy photo downloads", async () => {
+  const source = await readFile(new URL("src/main.jsx", root), "utf8");
+
+  assert.match(source, /\{qrCode && qrOpen && \(/);
+  assert.match(source, /previewSrc:\s*`\/assets\/life\/previews\/\$\{previewFile\}`/);
+  assert.match(source, /src=\{photo\.previewSrc\}/);
+  assert.match(source, /src=\{photo\.src\}/);
 });
 
 test("QF and XT archives use fixed project metadata beside a seamless scrolling canvas", async () => {
@@ -270,7 +281,7 @@ test("Life opens as a full-screen Figma-based page with uncropped photo frames",
   assert.match(styles, /--film-hole-pitch:/);
   assert.match(styles, /\.film-exposure\s*\{[^}]*border-radius:\s*0;/s);
   assert.doesNotMatch(styles, /grid-template-columns:\s*repeat\(6, var\(--film-hole-size\)\)/);
-  assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.34\);[^}]*backdrop-filter:\s*blur\(18px\)\s*saturate\(116%\)/s);
+  assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.42\);[^}]*backdrop-filter:\s*blur\(24px\)\s*saturate\(122%\)/s);
   assert.match(styles, /repeating-linear-gradient/);
   assert.match(styles, /\.film-frame img\s*\{[^}]*object-fit:\s*contain;/s);
   assert.doesNotMatch(styles, /\.film-frame img\s*\{[^}]*object-fit:\s*cover;/s);
@@ -318,12 +329,12 @@ test("Life gallery uses a clickable organic cue and a Figma-matched glass stage"
   assert.match(lifeSource, /className="life-panel-arrow"[^>]*onClick=\{onExplore\}/s);
   assert.match(lifeSource, /aria-label="浏览 Life 照片"/);
   assert.match(lifeSource, /animateLifeScrollTo\(Math.ceil\(filmStage\?\.offsetLeft/);
-  assert.match(styles, /\.life-title mark\s*\{[^}]*transparent 0 20%,\s*var\(--life-ink\) 20% 81%,\s*transparent 81% 100%/s);
-  assert.match(styles, /\.life-title-word::after\s*\{[^}]*clip-path:\s*inset\(20% 0 19% 0\)/s);
+  assert.match(styles, /\.life-title mark\s*\{[^}]*transparent 0 24%,\s*var\(--life-ink\) 24% 78%,\s*transparent 78% 100%/s);
+  assert.match(styles, /\.life-title-word::after\s*\{[^}]*clip-path:\s*inset\(24% 0 22% 0\)/s);
   assert.match(styles, /\.life-panel-arrow\s*\{[^}]*right:\s*28px;/s);
   assert.match(styles, /\.life-panel-arrow\s*\{[^}]*animation:\s*life-arrow-nudge\s+1600ms\s+ease-in-out\s+infinite;/s);
   assert.match(styles, /@keyframes life-arrow-nudge\s*\{\s*0%,\s*100%\s*\{[^}]*translate3d\(-2px,[^}]*\}\s*50%\s*\{[^}]*translate3d\(3px,/s);
-  assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.34\);[^}]*backdrop-filter:\s*blur\(18px\)\s*saturate\(116%\)/s);
+  assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.42\);[^}]*backdrop-filter:\s*blur\(24px\)\s*saturate\(122%\)/s);
   assert.match(styles, /\.life-story-copy\s*\{[^}]*left:\s*var\(--life-story-x,/s);
   assert.match(source, /function LifeStoryCopy\(\{ expanded \}\)/);
   assert.match(source, /const LIFE_STORY_TYPED_PREFIX = "I’m probably ";/);
@@ -472,7 +483,7 @@ test("resume preview defaults to Chinese with a clean top toolbar and icon actio
 test("Life gallery uses the approved green glass stage and centered designer highlight", async () => {
   const styles = await readFile(new URL("src/styles.css", root), "utf8");
 
-  assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.34\)/s);
-  assert.match(styles, /\.life-title mark\s*\{[^}]*transparent 0 20%,\s*var\(--life-ink\) 20% 81%,\s*transparent 81% 100%/s);
-  assert.match(styles, /\.life-title-word::after\s*\{[^}]*clip-path:\s*inset\(20% 0 19% 0\);/s);
+  assert.match(styles, /\.life-film-stage\s*\{[^}]*background:\s*rgba\(239,\s*247,\s*241,\s*\.42\)/s);
+  assert.match(styles, /\.life-title mark\s*\{[^}]*transparent 0 24%,\s*var\(--life-ink\) 24% 78%,\s*transparent 78% 100%/s);
+  assert.match(styles, /\.life-title-word::after\s*\{[^}]*clip-path:\s*inset\(24% 0 22% 0\);/s);
 });

@@ -83,7 +83,8 @@ const LIFE_PHOTOS = [
 ].map(([file, alt], index) => {
   const optimizedFile = file.replace(/\.(?:jpe?g|png)$/i, ".webp");
   const src = `/assets/life/user-photos/${optimizedFile}`;
-  return { src, previewSrc: src, alt, frameNumber: index + 1 };
+  const previewFile = optimizedFile.replace(/\.webp$/i, ".jpg");
+  return { src, previewSrc: `/assets/life/previews/${previewFile}`, alt, frameNumber: index + 1 };
 });
 const workGridVariants = {
   hidden: {},
@@ -495,7 +496,7 @@ function TopDockLink({ label, icon, mouseX, qrCode = null, qrOpen = false, onTog
       <span className="top-dock-icon-shell">
         <img className="top-dock-icon" src={asset(icon)} alt="" />
       </span>
-      {qrCode && (
+      {qrCode && qrOpen && (
         <span className="top-dock-qr-popover" aria-hidden={!qrOpen}>
           <img src={asset(qrCode)} alt="" />
         </span>
@@ -577,10 +578,10 @@ function FigmaFolder({ className, variant, label, onOpen }) {
         )}
         {variant === "life" && (
           <>
-            <i className="folder-sheet folder-sheet-back"><img src="/assets/life/user-photos/life-seaside-sunset.webp" alt="" loading="lazy" decoding="async" /></i>
-            <i className="folder-sheet folder-sheet-middle"><img src="/assets/life/user-photos/life-snow-cycling.webp" alt="" loading="lazy" decoding="async" /></i>
+            <i className="folder-sheet folder-sheet-back"><img src="/assets/life/home-thumbs/home-life-seaside.jpg" alt="" loading="lazy" decoding="async" /></i>
+            <i className="folder-sheet folder-sheet-middle"><img src="/assets/life/home-thumbs/home-life-snow.jpg" alt="" loading="lazy" decoding="async" /></i>
             <i className="folder-cover folder-cover-life">
-              <img src={asset("life-mango.webp")} alt="" />
+              <img src="/assets/life/home-thumbs/home-life-film-03.jpg" alt="" loading="lazy" decoding="async" />
             </i>
           </>
         )}
