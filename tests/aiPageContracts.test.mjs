@@ -122,7 +122,7 @@ test("Playground opens without a live full-screen blur and pauses the animated d
   assert.match(source, /<PixelCowCat paused=\{Boolean\(openedFolder \|\| resumeOpen \|\| activeProject\)\}\s*\/>/);
 });
 
-test("the cat reacts while held and the Life folder uses contrasting clean photos", async () => {
+test("the cat reacts while held and the Life folder uses contrasting photos with the apple cover", async () => {
   const [source, styles] = await Promise.all([
     readFile(new URL("src/main.jsx", root), "utf8"),
     readFile(new URL("src/styles.css", root), "utf8")
@@ -133,7 +133,7 @@ test("the cat reacts while held and the Life folder uses contrasting clean photo
   assert.match(styles, /\.pixel-cat-runner\.is-held \.pixel-cat-speech\s*\{[^}]*opacity:\s*1;/s);
   assert.match(source, /folder-sheet-back[^\n]*home-life-seaside\.jpg/);
   assert.match(source, /folder-sheet-middle[^\n]*home-life-snow\.jpg/);
-  assert.match(source, /folder-cover-life[\s\S]{0,180}home-life-film-03\.jpg/);
+  assert.match(source, /folder-cover-life[\s\S]{0,180}life-mango\.webp/);
   assert.match(styles, /\.pixel-cat-speech\s*\{[^}]*bottom:\s*55px;[^}]*border:\s*1px solid/s);
 });
 

@@ -581,7 +581,7 @@ function FigmaFolder({ className, variant, label, onOpen }) {
             <i className="folder-sheet folder-sheet-back"><img src="/assets/life/home-thumbs/home-life-seaside.jpg" alt="" loading="lazy" decoding="async" /></i>
             <i className="folder-sheet folder-sheet-middle"><img src="/assets/life/home-thumbs/home-life-snow.jpg" alt="" loading="lazy" decoding="async" /></i>
             <i className="folder-cover folder-cover-life">
-              <img src="/assets/life/home-thumbs/home-life-film-03.jpg" alt="" loading="lazy" decoding="async" />
+              <img src={asset("life-mango.webp")} alt="" loading="lazy" decoding="async" />
             </i>
           </>
         )}
