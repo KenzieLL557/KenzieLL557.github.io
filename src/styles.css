@@ -147,6 +147,17 @@ a { color: inherit; }
   height: 22px;
 }
 
+/* Balance the different SVG viewBox padding so all three marks have the same visual weight. */
+.top-dock-link-dribbble .top-dock-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.top-dock-link-email .top-dock-icon {
+  width: 22px;
+  height: 22px;
+}
+
 .top-dock-qr-popover {
   position: absolute;
   right: 0;
@@ -605,7 +616,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .life-title mark {
   display: inline-block;
   padding: 0 .025em;
-  background: linear-gradient(to bottom, transparent 0 24%, var(--life-ink) 24% 78%, transparent 78% 100%);
+  background: linear-gradient(to bottom, transparent 0 32%, var(--life-ink) 32% 86%, transparent 86% 100%);
   line-height: 1;
   letter-spacing: -.04em;
   vertical-align: 0;
@@ -615,7 +626,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   position: absolute;
   inset: 0;
   color: var(--life-paper);
-  clip-path: inset(24% 0 22% 0);
+  clip-path: inset(32% 0 14% 0);
   content: attr(data-text);
   pointer-events: none;
 }

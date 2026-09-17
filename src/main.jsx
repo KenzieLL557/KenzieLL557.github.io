@@ -464,7 +464,7 @@ function Draggable({ className, children, onClick, onDragStart, ...props }) {
   );
 }
 
-function TopDockLink({ label, icon, mouseX, qrCode = null, qrOpen = false, onToggleQr }) {
+function TopDockLink({ label, icon, mouseX, qrCode = null, qrOpen = false, onToggleQr, href = "#", target }) {
   const linkRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
   const distance = useTransform(mouseX, (pointerX) => {
@@ -483,14 +483,18 @@ function TopDockLink({ label, icon, mouseX, qrCode = null, qrOpen = false, onTog
   return (
     <motion.a
       ref={linkRef}
-      className={`top-dock-link ${qrCode ? "top-dock-link-wechat" : ""} ${qrOpen ? "is-qr-open" : ""}`}
-      href="#"
+      className={`top-dock-link ${qrCode ? "top-dock-link-wechat" : ""} ${label === "Dribbble" ? "top-dock-link-dribbble" : ""} ${label === "Email" ? "top-dock-link-email" : ""} ${qrOpen ? "is-qr-open" : ""}`}
+      href={href}
+      target={target}
+      rel={target === "_blank" ? "noreferrer" : undefined}
       aria-label={label}
       aria-expanded={qrCode ? qrOpen : undefined}
       style={{ width: itemSize, height: TOP_DOCK.size }}
       onClick={(event) => {
-        event.preventDefault();
-        if (qrCode) onToggleQr?.();
+        if (qrCode) {
+          event.preventDefault();
+          onToggleQr?.();
+        }
       }}
     >
       <span className="top-dock-icon-shell">
@@ -542,8 +546,8 @@ function TopNavigation() {
         }}
         onPointerLeave={() => mouseX.set(Infinity)}
       >
-        <TopDockLink label="Dribbble" icon="dribbble.svg" mouseX={mouseX} />
-        <TopDockLink label="Figma" icon="figma.svg" mouseX={mouseX} />
+        <TopDockLink label="Dribbble" icon="dribbble.svg" mouseX={mouseX} href="https://dribbble.com/KenzieL" target="_blank" />
+        <TopDockLink label="Email" icon="mail.svg" mouseX={mouseX} href="mailto:kenziel@163.com" />
         <TopDockLink
           label="wechat"
           icon="linkedin.svg"
