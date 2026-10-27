@@ -156,6 +156,11 @@ a { color: inherit; }
 .top-dock-link-email .top-dock-icon {
   width: 22px;
   height: 22px;
+  color: rgba(255, 255, 255, .88);
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .top-dock-qr-popover {
@@ -1393,17 +1398,27 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   transition: grid-template-rows 360ms cubic-bezier(.22, 1, .36, 1);
 }
 
-.image-archive-shell.is-header-hidden { grid-template-rows: 0 minmax(0, 1fr); }
+.image-archive-shell.is-header-hidden { grid-template-rows: 64px minmax(0, 1fr); }
+.image-archive-shell.is-header-hidden .image-archive-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+.image-archive-shell.is-header-hidden .image-archive-layout {
+  grid-row: 1 / -1;
+}
 
 .project-header.image-archive-header {
   position: relative;
   inset: auto;
   grid-row: 1;
   border-bottom: 0;
-  background: rgba(255, 255, 255, .76);
-  box-shadow: none;
-  backdrop-filter: blur(18px) saturate(100%);
-  -webkit-backdrop-filter: blur(18px) saturate(100%);
+  background: rgba(255, 255, 255, .56);
+  box-shadow: 0 4px 18px rgba(28, 41, 64, .045), inset 0 -1px rgba(62, 78, 105, .06);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
 }
 
 .image-archive-layout {
@@ -1734,9 +1749,11 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  background: rgba(234, 241, 252, .58);
-  backdrop-filter: blur(24px) saturate(165%);
+  border-bottom: 1px solid rgba(255, 255, 255, .42);
+  background: rgba(234, 241, 252, .48);
   -webkit-backdrop-filter: blur(24px) saturate(165%);
+  backdrop-filter: blur(24px) saturate(165%);
+  box-shadow: 0 4px 18px rgba(36, 55, 84, .045), inset 0 -1px rgba(78, 105, 145, .06);
   transition: transform 420ms cubic-bezier(.22, 1, .36, 1), opacity 320ms ease;
 }
 
@@ -2196,7 +2213,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 }
 
 .xiaoluo-header {
-  background: rgba(251, 252, 255, .72);
+  background: rgba(251, 252, 255, .52);
 }
 
 .xiaoluo-detail {
@@ -3278,7 +3295,7 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 }
 
 .ai-detail-shell .project-header {
-  background: rgba(244, 238, 230, .64);
+  background: rgba(244, 238, 230, .5);
 }
 
 .ai-detail {
@@ -3725,9 +3742,9 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 
 .ai-detail-shell .project-header {
   border-bottom: 1px solid rgba(217, 214, 241, .42);
-  background: rgba(251, 250, 255, .64);
-  backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(251, 250, 255, .5);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
 }
 
 .ai-detail-shell .project-toc {
@@ -5412,7 +5429,8 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   position: relative;
   display: block;
   width: 100%;
-  height: 473px;
+  height: auto;
+  aspect-ratio: 1000 / 473;
   overflow: hidden;
   padding: 0;
   border: 0;
@@ -5423,19 +5441,19 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 
 .project-hero-image img:first-child {
   position: absolute;
-  left: -178px;
-  top: -178px;
-  width: 1198px;
-  height: 701px;
+  left: -17.8%;
+  top: -37.63%;
+  width: 119.8%;
+  height: 148.2%;
   object-fit: cover;
 }
 
 .project-hero-image img:last-child {
   position: absolute;
-  left: 71px;
-  top: 56px;
-  width: 864px;
-  height: 540px;
+  left: 7.1%;
+  top: 11.84%;
+  width: 86.4%;
+  height: 114.16%;
   border-radius: 8px;
   object-fit: cover;
   object-position: top center;
@@ -5645,9 +5663,199 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 .figma-bullets { margin-top: 12px; margin-bottom: 28px; padding-left: 24px; }
 .figma-bullets li { margin: 0; }
 
+.workflow-prototype-block {
+  margin-top: 48px;
+  padding: 18px;
+  border: 1px solid rgba(105, 125, 168, .16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 0 18px 50px rgba(39, 59, 99, .08);
+}
+
+.workflow-prototype-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 6px 6px 18px;
+}
+
+.workflow-prototype-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: #3660dd;
+  font-family: Gantari, Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 16px;
+}
+
+.workflow-prototype-intro h3 {
+  margin: 0 0 6px;
+  color: #121315;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 30px;
+}
+
+.workflow-prototype-intro p {
+  max-width: 690px;
+  margin: 0;
+  color: #676f7b;
+  font-size: 14px;
+  line-height: 23px;
+}
+
+.workflow-prototype-launch {
+  display: flex;
+  min-width: 144px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 21px;
+  background: #121315;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.workflow-prototype-launch:hover { background: #3660dd; }
+
+.workflow-prototype-preview {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 390px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(54, 96, 221, .13);
+  border-radius: 12px;
+  background-color: #f8f9fc;
+  background-image: radial-gradient(circle, rgba(114, 128, 161, .24) 1px, transparent 1.2px);
+  background-size: 16px 16px;
+  cursor: pointer;
+}
+
+.workflow-preview-grid {
+  position: absolute;
+  inset: 0;
+  filter: saturate(.86);
+  opacity: .9;
+  transform: scale(.92);
+  transition: transform 300ms cubic-bezier(.22, 1, .36, 1), opacity 300ms ease;
+}
+
+.workflow-preview-grid i {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 18%;
+  padding: 30px 10px 12px;
+  overflow: hidden;
+  border: 1px solid #d6dbe6;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(19, 48, 107, .08);
+}
+.workflow-preview-grid i::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 22px;
+}
+.workflow-preview-grid i > span {
+  display: block;
+  height: 8px;
+  border-radius: 3px;
+  background: #d5dbe6;
+}
+.workflow-preview-grid i.is-start { left: 2%; top: 24%; height: 46%; }
+.workflow-preview-grid i.is-start::before { background: #e7eefc; }
+.workflow-preview-grid i.is-start > span:nth-child(2) { height: 16px; background: #e8edf5; }
+.workflow-preview-grid i.is-condition { left: 23%; top: 8%; height: 62%; }
+.workflow-preview-grid i.is-condition::before { background: #fff1e3; }
+.workflow-preview-grid i.is-condition > span:nth-child(2) { height: 28px; background: #eef1f6; }
+.workflow-preview-grid i.is-condition > span:nth-child(4) { height: 12px; }
+.workflow-preview-grid i.is-choice { left: 45%; top: 3%; height: 34%; }
+.workflow-preview-grid i.is-choice::before { background: #fff6e2; }
+.workflow-preview-grid i.is-choice > span { height: 12px; }
+.workflow-preview-grid i.is-score { left: 67%; top: 16%; height: 50%; }
+.workflow-preview-grid i.is-score::before { background: #f3eeff; }
+.workflow-preview-grid i.is-score > span:nth-child(1) { width: 40% !important; height: 6px; }
+.workflow-preview-grid i.is-score > span:nth-child(3) { height: 20px; background: #eceff5; }
+.workflow-preview-grid i.is-model { left: 45%; top: 54%; height: 36%; }
+.workflow-preview-grid i.is-model::before { background: #ece8ff; }
+.workflow-preview-grid i.is-model > span:nth-child(2) { height: 18px; background: #e7ebf3; }
+.workflow-preview-grid svg {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.workflow-preview-grid svg path {
+  fill: none;
+  stroke: #7898e4;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.workflow-prototype-preview:hover .workflow-preview-grid { opacity: 1; transform: scale(.95); }
+.workflow-preview-cta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 48px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, .82);
+  border-radius: 24px;
+  background: rgba(27, 31, 40, .88);
+  box-shadow: 0 12px 30px rgba(25, 35, 62, .18);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.workflow-demo-loading {
+  display: flex;
+  min-height: 580px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 14px;
+  background: #f8f9fc;
+  color: #767e89;
+  font-size: 13px;
+}
+.workflow-demo-loading span {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dce2f0;
+  border-top-color: #3660dd;
+  border-radius: 50%;
+  animation: workflow-loading-spin .7s linear infinite;
+}
+@keyframes workflow-loading-spin { to { transform: rotate(360deg); } }
+
 .hotspot-demo {
   position: relative;
-  height: 649px;
+  height: auto;
+  aspect-ratio: 1000 / 649;
   overflow: visible;
   border-radius: 8px;
   background: #dce7f7;
@@ -5655,10 +5863,10 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
 
 .hotspot-demo > img {
   position: absolute;
-  left: 32px;
-  top: 32px;
-  width: 936px;
-  height: 585px;
+  left: 3.2%;
+  top: 4.93%;
+  width: 93.6%;
+  height: auto;
   border-radius: 8px;
   object-fit: cover;
   object-position: top center;
@@ -5699,8 +5907,8 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   animation: none;
 }
 .hotspot-dot span { position: relative; z-index: 1; }
-.hotspot-a { left: 264px; top: 82px; }
-.hotspot-b { left: 65px; top: 367px; }
+.hotspot-a { left: 26.4%; top: 12.63%; }
+.hotspot-b { left: 6.5%; top: 56.55%; }
 
 @keyframes hotspot-pulse {
   0% { width: 32px; height: 32px; opacity: .95; }
@@ -5719,8 +5927,8 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   box-shadow: 0 4px 6px rgba(0, 0, 0, .1), 0 2px 2px rgba(0, 0, 0, .06);
 }
 
-.sticky-note-a { left: 316px; top: 82px; width: 280px; }
-.sticky-note-b { left: 117px; top: 367px; width: 368px; }
+.sticky-note-a { left: 31.6%; top: 12.63%; width: 280px; }
+.sticky-note-b { left: 11.7%; top: 56.55%; width: 368px; }
 .sticky-note strong { font-size: 16px; line-height: 24px; }
 .sticky-note p { margin: 0 0 6px; font-size: 14px; line-height: 24px; }
 .sticky-note p:last-child { margin-bottom: 0; }
@@ -6507,4 +6715,32 @@ button.mac-window-dot-close:focus-visible { outline: 2px solid rgba(25, 79, 132,
   }
 
   .image-archive-sidebar { padding: 46px 48px 38px; }
+}
+
+@media (max-width: 720px) {
+  .workflow-prototype-block {
+    margin-inline: -8px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .workflow-prototype-intro {
+    display: grid;
+    align-items: start;
+    gap: 14px;
+    padding: 8px 4px 16px;
+  }
+
+  .workflow-prototype-intro h3 { font-size: 18px; line-height: 26px; }
+  .workflow-prototype-intro p { font-size: 13px; line-height: 21px; }
+  .workflow-prototype-launch { width: 100%; }
+  .workflow-prototype-preview { min-height: 300px; }
+  .workflow-preview-grid { left: -50%; width: 170%; }
+  .workflow-preview-cta { height: 44px; padding-inline: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-preview-grid,
+  .workflow-prototype-launch { transition: none; }
+  .workflow-demo-loading span { animation: none; }
 }

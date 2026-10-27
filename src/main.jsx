@@ -28,6 +28,8 @@ import {
 } from "./lifeGallery.js";
 import "./styles.css";
 
+const WorkflowDemo = React.lazy(() => import("./components/WorkflowDemo.jsx"));
+
 const asset = (name) => `/assets/figma/${name}`;
 const CANVAS = { width: 1512, height: 982 };
 const TOP_DOCK = { size: 36, magnification: 46, distance: 120 };
@@ -110,7 +112,18 @@ const xiaoluoModules = import.meta.glob("../work/xiaoluo-zhiduoxing/assets/*.web
   query: "?url",
   import: "default"
 });
-const xiaoluoAsset = (name) => xiaoluoModules[`../work/xiaoluo-zhiduoxing/${name}`];
+const xiaoluoPngModules = import.meta.glob([
+  "../work/xiaoluo-zhiduoxing/assets/*.gif"
+], {
+  eager: true,
+  query: "?url",
+  import: "default"
+});
+const xiaoluoAsset = (name) => {
+  // Keep the animated source instead of the static WebP conversion.
+  if (name === "assets/ai-search-flow.webp") return xiaoluoPngModules["../work/xiaoluo-zhiduoxing/assets/ai-search-flow.gif"];
+  return xiaoluoModules[`../work/xiaoluo-zhiduoxing/${name}`] || xiaoluoPngModules[`../work/xiaoluo-zhiduoxing/${name}`];
+};
 
 const dragProps = {
   drag: true,
@@ -405,6 +418,7 @@ function Icon({ name, size = 24 }) {
     right: <path d="M2.91675 6.99935H11.0834M7.00008 2.91602L11.0834 6.99935L7.00008 11.0827" />,
     up: <path d="M12 19V5M19 12L12 5L5 12" />,
     down: <path d="M12 5V19M19 12L12 19L5 12" />,
+    play: <path d="M8 5.5v13l10-6.5L8 5.5Z" />,
     restart: <path d="M5 8h10a5 5 0 0 1 0 10h-3M5 8l4-4M5 8l4 4" />,
     download: (
       <>
@@ -498,7 +512,14 @@ function TopDockLink({ label, icon, mouseX, qrCode = null, qrOpen = false, onTog
       }}
     >
       <span className="top-dock-icon-shell">
-        <img className="top-dock-icon" src={asset(icon)} alt="" />
+        {label === "Email" ? (
+          <svg className="top-dock-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m3.5 7 8.5 6 8.5-6" />
+          </svg>
+        ) : (
+          <img className="top-dock-icon" src={asset(icon)} alt="" />
+        )}
       </span>
       {qrCode && qrOpen && (
         <span className="top-dock-qr-popover" aria-hidden={!qrOpen}>
@@ -1653,6 +1674,13 @@ function HotspotDemo({ onZoom }) {
   const toggleNote = (key) => setActive((current) => current === key ? null : key);
   const switchNote = () => setActive((current) => current === "a" ? "b" : "a");
 
+  useEffect(() => {
+    const image = new Image();
+    image.decoding = "async";
+    image.fetchPriority = "high";
+    image.src = dayiAsset("note-b.webp");
+  }, []);
+
   return (
     <div className="hotspot-demo" onClick={() => setActive(null)}>
       <img loading="lazy" decoding="async" src={dayiAsset("home-empty.webp")} alt="平台首页空状态" />
@@ -1685,7 +1713,7 @@ function HotspotDemo({ onZoom }) {
           )}
           {note.image && (
             <button type="button" className="sticky-note-image" onClick={() => onZoom(dayiAsset(note.image), "便签截图")}>
-              <img loading="lazy" decoding="async" src={dayiAsset(note.image)} alt="便签截图" />
+              <img loading="eager" fetchPriority="high" decoding="async" src={dayiAsset(note.image)} alt="便签截图" />
             </button>
           )}
           <button type="button" className="sticky-note-arrow" onClick={switchNote} aria-label="切换标注">
@@ -1728,9 +1756,63 @@ function ProjectFooter({ project, onNavigate, onTop }) {
   );
 }
 
+function WorkflowCoverCanvas() {
+  const rootRef = useRef(null);
+  const [lines, setLines] = useState([]);
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+    const measure = () => {
+      const box = root.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      const cards = Object.fromEntries([...root.querySelectorAll("[data-cover-node]")].map((element) => [element.dataset.coverNode, element.getBoundingClientRect()]));
+      const edge = (id, side, bias) => {
+        const rect = cards[id];
+        if (!rect) return null;
+        return {
+          x: ((side === "right" ? rect.right : rect.left) - box.left) / box.width * 100,
+          y: (rect.top + rect.height * bias - box.top) / box.height * 100
+        };
+      };
+      const pairs = [
+        ["start", "right", .5, "condition", "left", .38],
+        ["condition", "right", .24, "choice", "left", .5],
+        ["choice", "right", .5, "score", "left", .42],
+        ["condition", "right", .76, "model", "left", .48]
+      ];
+      setLines(pairs.map(([from, fromSide, fromBias, to, toSide, toBias]) => ({
+        id: `${from}-${to}`,
+        start: edge(from, fromSide, fromBias),
+        end: edge(to, toSide, toBias)
+      })).filter((line) => line.start && line.end));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+  const bars = {
+    start: ["46%", "72%", "58%"],
+    condition: ["38%", "100%", "84%", "54%"],
+    choice: ["78%", "46%"],
+    score: ["62%", "90%", "44%", "74%"],
+    model: ["34%", "100%", "68%"]
+  };
+  return <span className="workflow-preview-grid" ref={rootRef} aria-hidden="true">
+    {Object.entries(bars).map(([id, widths]) => <i key={id} data-cover-node={id} className={`is-${id}`}>{widths.map((width, index) => <span key={index} style={{ width }} />)}</i>)}
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      {lines.map((line) => {
+        const dx = Math.max(3.5, (line.end.x - line.start.x) * .5);
+        return <path key={line.id} d={`M ${line.start.x} ${line.start.y} C ${line.start.x + dx} ${line.start.y}, ${line.end.x - dx} ${line.end.y}, ${line.end.x} ${line.end.y}`} />;
+      })}
+    </svg>
+  </span>;
+}
+
 function ProjectDetail({ onBack, onHome, onNavigate }) {
   const scrollerRef = useRef(null);
   const [zoom, setZoom] = useState(null);
+  const [workflowDemoOpen, setWorkflowDemoOpen] = useState(false);
   const [headerHidden, setHeaderHidden] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const lastScrollTop = useRef(0);
@@ -1792,9 +1874,9 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
   return (
     <motion.div
       className="project-detail-shell"
-      initial={{ opacity: 0, y: 72, scale: 0.985, filter: "blur(10px)" }}
-      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: 36, scale: 0.992, filter: "blur(6px)" }}
+      initial={{ opacity: 0, y: 72, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 36, scale: 0.992 }}
       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
     >
       <header className={`project-header ${headerHidden ? "is-hidden" : ""}`}>
@@ -1911,6 +1993,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
               ))}
             </div>
           </div>
+
         </section>
 
         <section className="project-section solution-section">
@@ -1929,6 +2012,24 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
               <ProjectImage src={dayiAsset("detail-result.webp")} alt="节点级结果查看" onZoom={openZoom} />
             </div>
           </article>
+          <div className="workflow-prototype-block">
+            <div className="workflow-prototype-intro">
+              <div>
+                <span className="workflow-prototype-kicker">INTERACTIVE PROTOTYPE</span>
+                <h3>工作流编排 · 可交互体验</h3>
+              </div>
+            </div>
+            {workflowDemoOpen ? (
+              <React.Suspense fallback={<div className="workflow-demo-loading"><span />正在载入交互画布…</div>}>
+                <WorkflowDemo onClose={() => setWorkflowDemoOpen(false)} />
+              </React.Suspense>
+            ) : (
+              <button type="button" className="workflow-prototype-preview" onClick={() => setWorkflowDemoOpen(true)} aria-label="打开工作流交互演示">
+                <WorkflowCoverCanvas />
+                <span className="workflow-preview-cta"><Icon name="play" size={18} /> 点击进入交互演示</span>
+              </button>
+            )}
+          </div>
           <article>
             <h3><span>03</span> 提升机构管理员在多模型场景下的模型资源管理效率</h3>
             <p className="section-copy">面向机构管理员和平台运维，模型管理模块需要支持模型配置、监控、数据与插件配置，帮助团队在多模型场景下更清楚地分配、观察和治理资源。</p>
@@ -1947,7 +2048,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
         <section id="others" className="project-section">
           <h2>其他页面</h2>
           <div className="horizontal-gallery other-gallery">
-            {["other-hover.webp", "other-mcp.webp"].map((name, index) => (
+            {["other-hover.webp", "other-mcp.webp", "other-page-1.webp", "other-page-2.webp", "other-page-3.webp"].map((name, index) => (
               <ProjectImage key={name} src={dayiAsset(name)} alt={`其他页面 ${index + 1}`} onZoom={openZoom} />
             ))}
           </div>
@@ -2045,9 +2146,9 @@ function XiaoluoProjectDetail({ onBack, onHome, onNavigate }) {
   return (
     <motion.div
       className="project-detail-shell xiaoluo-detail-shell"
-      initial={{ opacity: 0, y: 72, scale: 0.985, filter: "blur(10px)" }}
-      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: 36, scale: 0.992, filter: "blur(6px)" }}
+      initial={{ opacity: 0, y: 72, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 36, scale: 0.992 }}
       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
     >
       <header className={`project-header xiaoluo-header ${headerHidden ? "is-hidden" : ""}`}>
@@ -2409,9 +2510,9 @@ function RocheProjectDetail({ onBack, onHome }) {
   return (
     <motion.div
       className="project-detail-shell roche-detail-shell"
-      initial={{ opacity: 0, y: 72, scale: 0.985, filter: "blur(10px)" }}
-      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: 36, scale: 0.992, filter: "blur(6px)" }}
+      initial={{ opacity: 0, y: 72, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 36, scale: 0.992 }}
       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
     >
       <header className={`project-header ${headerHidden ? "is-hidden" : ""}`}>
@@ -2755,6 +2856,13 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
   const [zoom, setZoom] = useState(null);
   const lastScrollTop = useRef(0);
 
+  useEffect(() => {
+    const image = new Image();
+    image.decoding = "async";
+    image.fetchPriority = "low";
+    image.src = xiaoluoAsset("assets/ai-cursor-case.webp");
+  }, []);
+
   const scrollTo = (id) => {
     const target = scrollerRef.current?.querySelector(`#${id}`);
     setActiveSection(id);
@@ -2810,9 +2918,9 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
   return (
     <motion.div
       className="project-detail-shell ai-detail-shell"
-      initial={{ opacity: 0, y: 72, scale: 0.985, filter: "blur(10px)" }}
-      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: 36, scale: 0.992, filter: "blur(6px)" }}
+      initial={{ opacity: 0, y: 72, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 36, scale: 0.992 }}
       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
     >
       <header className={`project-header ${headerHidden ? "is-hidden" : ""}`}>
@@ -2899,8 +3007,8 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
 
         <section id="ai-prototype" className="project-section ai-section">
           <span className="ai-section-index">03 / AI Workflow</span>
-          <h2>AI 提效方式的三阶段演变</h2>
-          <p className="section-copy">在各类 AI to Prototype 工具开始流行时，我集中试用了 Stitch、Lovable、Magic Patterns、V0 等产品。综合团队已有的 Figma 使用环境、设计可调整性和后续交付方式，最终 Figma Make 更符合我们的需求。围绕真实项目的协作和交付，使用 AI 提效的工作方式也逐步经历了三个阶段：从多工具生成方案并验证方向，到形成可交付代码的完整流程，再到设计师直接进入代码环境完成 Rush 项目的质量校准。</p>
+          <h2>AI 提效方式的四阶段演变</h2>
+          <p className="section-copy">在各类 AI to Prototype 工具开始流行时，我集中试用了 Stitch、Lovable、Magic Patterns、V0 等产品。综合团队已有的 Figma 使用环境、设计可调整性和后续交付方式，最终 Figma Make 更符合我们的需求。围绕真实项目的协作和交付，使用 AI 提效的工作方式也逐步经历了四个阶段：从多工具生成方案并验证方向，到形成可交付代码的完整流程，再到设计师直接进入代码环境完成 Rush 项目的质量校准，最终发展为设计师基于 PRD 和基础原型直接用 Cursor 生成前端并与后端协作交付。</p>
           <div className="ai-evolution-stack">
             <article className="ai-evolution-stage">
               <header><b>Phase 01</b><span>多工具生成与方案验证</span></header>
@@ -2957,6 +3065,17 @@ function AIDesignProjectDetail({ onBack, onHome, onNavigate }) {
                   </ol>
                 </figure>
                 <AISenseclawCompare onZoom={setZoom} />
+              </div>
+            </article>
+            <article className="ai-evolution-stage is-featured">
+              <header><b>Phase 04</b><span>PRD 到前端的 Cursor 协作</span></header>
+              <div className="ai-stage-content">
+                <h3>设计师直接把基础原型推进成可用前端</h3>
+                <p>在产品 PRD 和基础原型已经明确的前提下，设计师直接用 Cursor 生成前端页面，并与偏后端的全栈同事对接接口和业务逻辑。大部分基础页面通过 Cursor 对话快速生成，核心页面先在 Figma 中完成设计，再让 Cursor 按 1:1 还原。这样既减少前端研发投入，也减少一部分 UI 走查和反复沟通的时间。</p>
+                <div className="ai-case-note"><b>协作方式</b><p>PRD / 基础原型 → Cursor 生成基础页面 → Figma 设计核心页面 → Cursor 1:1 还原 → 与全栈同事联调。</p></div>
+                <figure className="ai-evidence-figure ai-cursor-case-figure">
+                  <AIImage src={xiaoluoAsset("assets/ai-cursor-case.webp")} alt="AI 健康管理小程序主要设计页面与 AI 直出后调试页面" onZoom={setZoom} />
+                </figure>
               </div>
             </article>
           </div>
