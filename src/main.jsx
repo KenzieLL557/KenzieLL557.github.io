@@ -1936,7 +1936,7 @@ function ProjectDetail({ onBack, onHome, onNavigate }) {
           <div className="goal-grid">
             {[
               ["icon-tool.webp", "提升平台化交付效率", "从项目制交付转向平台化交付，使单个场景的上线周期缩短40%～60%，单项目的人力投入下降30%～50%。"],
-              ["icon-thumb-up.webp", "提升医院项目转化与商业竞争力", "提升平台在医院评审、投标和方案演示中的支撑能力。"],
+              ["icon-thumb-up.webp", "增强医院项目演示与方案竞争力", "通过快速搭建项目来提升医疗 AI 方案的可理解性与可演示性，为医院评审、投标和项目转化提供支持。"],
               ["icon-target.webp", "建立平台运行治理与资源可控能力", "建立机构、模型、配额和监控的一体化治理能力，降低人工维护成本。"]
             ].map(([icon, title, copy]) => (
               <article key={title}><img loading="lazy" decoding="async" src={dayiAsset(icon)} alt="" /><h3>{title}</h3><p>{copy}</p></article>

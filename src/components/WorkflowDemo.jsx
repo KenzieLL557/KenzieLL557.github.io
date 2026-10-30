@@ -206,7 +206,7 @@ function ConditionConfig({ config, update, variables }) {
         </div>;
       })}</div></div>
     </section>)}
-    <button type="button" className="wf-add-branch" onClick={(event) => { stop(event); addBranch(); }}><FlowIcon name="plus" size={14} /> 添加 ELSE IF 分支</button>
+    <button type="button" className="wf-add-branch" onClick={(event) => { stop(event); addBranch(); }}><FlowIcon name="plus" size={14} /> 添加</button>
     <div className="wf-else-row">ELSE <span className="wf-route-port" /></div>
   </div>;
 }
@@ -214,9 +214,12 @@ function ConditionConfig({ config, update, variables }) {
 function ChoiceConfig({ config, update }) {
   const setOptions = (fn) => { const options = structuredClone(config.options); fn(options); update({ ...config, options }); };
   return <>
-    <Section title="输入"><label className="wf-field-label"><span>选择说明</span><textarea value={config.description} rows={3} placeholder="输入“/”可引用变量" onPointerDown={stop} onChange={(event) => update({ ...config, description: event.target.value })} /></label></Section>
-    <Section title="选项" action={<TinyButton icon="plus" onClick={() => setOptions((options) => options.push({ key: nextId("option"), value: "" }))}>添加</TinyButton>}>
-      <div className="wf-option-list">{config.options.map((option, index) => <label key={option.key}><span>选项{index + 1}<em className="wf-required">*</em></span><div><input value={option.value} placeholder="输入“/”可引用变量" onPointerDown={stop} onChange={(event) => setOptions((options) => { options[index].value = event.target.value; })} />{config.options.length > 1 && <button type="button" className="wf-delete-button" onClick={(event) => { stop(event); setOptions((options) => options.splice(index, 1)); }} aria-label="删除选项"><FlowIcon name="trash" size={16} /></button>}</div></label>)}</div>
+    <Section title="输入" action={<TinyButton icon="plus" onClick={() => setOptions((options) => options.push({ key: nextId("option"), value: "" }))}>添加</TinyButton>}>
+      <label className="wf-field-label"><span>选择说明</span><textarea value={config.description} rows={3} placeholder="输入“/”可引用变量" onPointerDown={stop} onChange={(event) => update({ ...config, description: event.target.value })} /></label>
+      <div className="wf-input-subsection">
+        <div className="wf-input-subsection-title">选项</div>
+        <div className="wf-option-list">{config.options.map((option, index) => <label key={option.key}><span>选项{index + 1}<em className="wf-required">*</em></span><div><input value={option.value} placeholder="输入“/”可引用变量" onPointerDown={stop} onChange={(event) => setOptions((options) => { options[index].value = event.target.value; })} />{config.options.length > 1 && <button type="button" className="wf-delete-button" onClick={(event) => { stop(event); setOptions((options) => options.splice(index, 1)); }} aria-label="删除选项"><FlowIcon name="trash" size={16} /></button>}</div></label>)}</div>
+      </div>
     </Section>
     <Section title="输出"><OutputList rows={[{ key: "selectResult", label: "用户选择结果", valueType: "String", required: true }]} /></Section>
   </>;
@@ -225,9 +228,12 @@ function ChoiceConfig({ config, update }) {
 function FormConfig({ config, update, openModal }) {
   const typeLabel = (value) => FORM_TYPES.find((item) => item.value === value)?.label || value;
   return <>
-    <Section title="输入"><label className="wf-field-label"><span>表单说明</span><textarea value={config.description} rows={2} onPointerDown={stop} onChange={(event) => update({ ...config, description: event.target.value })} /></label></Section>
-    <Section title="表单配置" action={<TinyButton icon="plus" onClick={() => openModal("form")}>添加</TinyButton>}>
-      <div className="wf-form-list">{config.fields.map((field, index) => <div className="wf-form-item" key={field.id}><span className="wf-drag-mark">⋮⋮</span><div><b>{field.key}{field.required && <em className="wf-required">*</em>}</b><small>{typeLabel(field.type)} · {field.variableName}</small></div><button type="button" onClick={(event) => { stop(event); openModal("form", field); }} aria-label="编辑表单项"><LinearEditIcon size={16} /></button><button type="button" className="wf-delete-button" onClick={(event) => { stop(event); update({ ...config, fields: config.fields.filter((_, fieldIndex) => fieldIndex !== index) }); }} aria-label="删除表单项"><FlowIcon name="trash" size={16} /></button></div>)}</div>
+    <Section title="输入" action={<TinyButton icon="plus" onClick={() => openModal("form")}>添加</TinyButton>}>
+      <label className="wf-field-label"><span>表单说明</span><textarea value={config.description} rows={2} onPointerDown={stop} onChange={(event) => update({ ...config, description: event.target.value })} /></label>
+      <div className="wf-input-subsection">
+        <div className="wf-input-subsection-title">表单配置</div>
+        <div className="wf-form-list">{config.fields.map((field, index) => <div className="wf-form-item" key={field.id}><span className="wf-drag-mark">⋮⋮</span><div><b>{field.key}{field.required && <em className="wf-required">*</em>}</b><small>{typeLabel(field.type)} · {field.variableName}</small></div><button type="button" onClick={(event) => { stop(event); openModal("form", field); }} aria-label="编辑表单项"><LinearEditIcon size={16} /></button><button type="button" className="wf-delete-button" onClick={(event) => { stop(event); update({ ...config, fields: config.fields.filter((_, fieldIndex) => fieldIndex !== index) }); }} aria-label="删除表单项"><FlowIcon name="trash" size={16} /></button></div>)}</div>
+      </div>
     </Section>
     <Section title="输出"><OutputList rows={config.fields.map((field) => ({ key: field.id, label: field.variableName, valueType: field.type === "number" ? "Number" : "String", required: field.required }))} /></Section>
   </>;
@@ -252,8 +258,10 @@ function ModelConfig({ config, update }) {
   const diversityParameters = MODEL_PARAMETER_DEFS.filter((item) => ["randomness", "topP", "topK", "repetitionPenalty", "presencePenalty", "frequencyPenalty"].includes(item.key));
   const outputParameters = MODEL_PARAMETER_DEFS.filter((item) => ["token", "streamOutputIntervalMs"].includes(item.key));
   return <>
-    <Section title="模型配置">
-      <div className={`wf-model-setting ${open ? "is-open" : ""}`} ref={rootRef}>
+    <Section title="输入">
+      <div className="wf-input-config-item wf-model-input-item">
+        <span className="wf-input-subsection-title">模型配置</span>
+        <div className={`wf-model-setting ${open ? "is-open" : ""}`} ref={rootRef}>
         <button type="button" className={`wf-model-trigger ${open ? "is-open" : ""}`} onClick={(event) => { stop(event); setOpen((value) => !value); }}>
           <span>{config.modelName || "请选择模型"}</span>
           <SourceIcon name="icon-decrease" />
@@ -279,9 +287,8 @@ function ModelConfig({ config, update }) {
             {config.openThink && <label className="wf-field-label"><span>推理强度</span><select value={config.reasoningEffort} onPointerDown={stop} onChange={(event) => patch("reasoningEffort", event.target.value)}><option value="inherit">继承模型</option><option value="low">低</option><option value="medium">中</option><option value="high">高</option></select></label>}
           </div>
         </div>}
+        </div>
       </div>
-    </Section>
-    <Section title="输入">
       <label className="wf-field-label"><span>用户问题</span><input value={config.userChatInput} placeholder="变量值" onPointerDown={stop} onChange={(event) => patch("userChatInput", event.target.value)} /></label>
       <div className="wf-switch-row"><span>视觉理解输入</span><Toggle checked={config.showChatImage} onChange={(value) => patch("showChatImage", value)} label="视觉理解输入" /></div>
       {config.showChatImage && <label className="wf-field-label"><span>图片变量</span><input value={config.chatImage} placeholder="选择图片变量" onPointerDown={stop} onChange={(event) => patch("chatImage", event.target.value)} /></label>}
@@ -558,7 +565,7 @@ function ConfigModal({ modal, onClose, onSave }) {
         {(form.type === "input" || (isVariable && form.variableType === "session" && form.valueType === "String")) && <label><span>最大长度</span><input type="number" min="0" max="4000" value={isVariable ? form.maxValue : form.max} onChange={(event) => patch(isVariable ? "maxValue" : "max", Number(event.target.value))} /></label>}
         {form.type === "number" && <div className="wf-modal-number-row"><label><span>最小值</span><input type="number" value={isVariable ? form.minValue : form.min} onChange={(event) => patch(isVariable ? "minValue" : "min", Number(event.target.value))} /></label><label><span>最大值</span><input type="number" value={isVariable ? form.maxValue : form.max} onChange={(event) => patch(isVariable ? "maxValue" : "max", Number(event.target.value))} /></label></div>}
         <label><span>默认值</span><input type={form.type === "number" ? "number" : "text"} value={form.defaultValue ?? ""} onChange={(event) => patch("defaultValue", form.type === "number" ? Number(event.target.value) : event.target.value)} /></label>
-        {form.type === "select" && <div className="wf-modal-options"><b>选项</b>{(form[optionKey] || []).map((item, index) => <label key={item.id}><span>选项{index + 1}<em className="wf-required">*</em></span><div><input value={item.value} placeholder="输入“/”可引用变量" onChange={(event) => setOptions((options) => { options[index].value = event.target.value; })} />{form[optionKey].length > 1 && <button type="button" onClick={() => setOptions((options) => options.splice(index, 1))}><FlowIcon name="trash" size={14} /></button>}</div></label>)}<TinyButton icon="plus" onClick={() => setOptions((options) => options.push({ id: nextId("option"), value: "" }))}>添加选项</TinyButton></div>}
+        {form.type === "select" && <div className="wf-modal-options"><b>选项</b>{(form[optionKey] || []).map((item, index) => <label key={item.id}><span>选项{index + 1}<em className="wf-required">*</em></span><div><input value={item.value} placeholder="输入“/”可引用变量" onChange={(event) => setOptions((options) => { options[index].value = event.target.value; })} />{form[optionKey].length > 1 && <button type="button" onClick={() => setOptions((options) => options.splice(index, 1))}><FlowIcon name="trash" size={14} /></button>}</div></label>)}<TinyButton icon="plus" onClick={() => setOptions((options) => options.push({ id: nextId("option"), value: "" }))}>添加</TinyButton></div>}
         {!canSave && <p className="wf-modal-error">请填写必填项，变量名需以字母开头，仅支持字母、数字和下划线。</p>}
       </div>
     </div>
